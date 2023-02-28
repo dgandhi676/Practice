@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Map</title>
+</head>
+
+<body>
+    <img src="IMAGES/wall1.jpeg" alt="" usemap="#imagemap1">
+
+    <map name="imagemap1">
+
+        <area shape="rect" coords="73,15,132,61" href="IMAGES/image1.jpg" alt="">
+
+        <area shape="circle" coords="19,105,16" href="test.txt" alt="">
+        <!-- 19,105,35
+        x1 = 19
+        x2 = 35
+        r = x2 - x1 = 35 - 19 = 16-->
+
+        <area shape="poly" coords="58,109,65,116,66,128,58,135,50,128,49,116" href="test1.txt" alt="">
+        <!--58,109,65,116,66,128,58,135,50,128,49,116-->
+
+    </map>
+</body>
+
+</html>
