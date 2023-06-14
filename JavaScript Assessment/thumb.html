@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <div class="main">
+        <img id="mainimg" src="image1.jpg">
+    </div>
+    <div class="slide-wrapper menu-bar">
+        <button class="left-arrow" id="slideleft">
+            <i id="arrowleft" class="fa-solid fa-chevron-left" style="color: #ffffff;"></i>
+        </button>
+        <ul class="thumbs">
+            <li onclick="thumbchange(1)" class="active"><img src="image1.jpg"></li>
+            <li onclick="thumbchange(2)"><img src="image2.jpg"></li>
+            <li onclick="thumbchange(3)"><img src="image3.jpg"></li>
+            <li onclick="thumbchange(4)"><img src="image4.jpg"></li>
+            <li onclick="thumbchange(5)"><img src="image5.jpg"></li>
+            <li onclick="thumbchange(6)"><img src="image6.jpg"></li>
+            <li onclick="thumbchange(7)"><img src="image7.jpg"></li>
+        </ul>
+        <button class="right-arrow" id="slideright">
+            <i id="arrowright" class="fa-solid fa-chevron-right" style="color: #ffffff;"></i>
+        </button>
+    </div>
+
+    <script>
+        let thumbnails = document.getElementsByClassName('thumbchange')
+
+        let activeImages = document.getElementsByClassName('active')
+
+        for (var i = 0; i < thumbnails.length; i++) {
+
+            thumbnails[i].addEventListener('onclick', function () {
+                console.log(activeImages)
+
+                if (activeImages.length > 0) {
+                    activeImages[0].classList.remove('active')
+                }
+
+                this.classList.add('active')
+                document.getElementById('featured').src = this.src
+            })
+        }
+
+
+        function thumbchange(num) {
+            var thumb = 'image' + num + '.jpg';
+            document.getElementById("mainimg").src = thumb;
+            isnavigation: true;
+            cover: true;
+        }
+
+       // let buttonright = document.getElementById('slideright');
+        //let buttonleft = document.getElementById('slideleft');
+//        buttonleft.addEventListener('click', function () {
+  //          document.getElementById('thumbs').scrollLeft -= 180
+    //    })
+
+      //  buttonright.addEventListener('click', function () {
+        //    document.getElementById('thumbs').scrollLeft += 180
+        //}) 
+    </script>
+</body>
+
+</html>
