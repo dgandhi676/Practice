@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google for Developers - from AI and Cloud to Mobile and Web</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="ICON/favicon.ico">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- ICON -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="media_screen.css">
+
+    <link rel="stylesheet"
+        href="//fonts.googleapis.com/css?family=Google+Sans:400,500|Roboto:400,400italic,500,500italic,700,700italic|Roboto+Mono:400,500,700&amp;display=swap">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg shadow">
+        <div class="container">
+            <a class="navbar-brand order-2 order-lg-1" href="#">
+                <img src="ICON/lockup-new.svg" alt="Bootstrap" width="219" height="32">
+            </a>
+            <button class="navbar-toggler order-1" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse order-3" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Products
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item lead d-flex flex-row" href="#">Develop</a>
+                                <ul>
+                                    <li><a class="dropdown-item" href="#">Android</a></li>
+                                    <li><a class="dropdown-item" href="#">ChromeOS</a></li>
+                                    <li><a class="dropdown-item" href="#">Cloud</a></li>
+                                    <li><a class="dropdown-item" href="#">Firebase</a></li>
+                                    <li><a class="dropdown-item" href="#">Google Assistant</a></li>
+                                    <li><a class="dropdown-item" href="#">Google Maps Platform</a></li>
+                                    <li><a class="dropdown-item" href="#">Google Workspace</a></li>
+                                    <li><a class="dropdown-item" href="#">Tensorflow</a></li>
+                                    <li><a class="dropdown-item" href="#">Web</a></li>
+                                    <li><a class="dropdown-item" href="#">Youtube</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="dropdown-item lead" href="#">Grow</a>
+                                <ul>
+                                    <li><a class="dropdown-item" href="#">Firebase</a></li>
+                                    <li><a class="dropdown-item" href="#">Google Ads</a></li>
+                                    <li><a class="dropdown-item" href="#">Google Analytics</a></li>
+                                    <li><a class="dropdown-item" href="#">Google Play</a></li>
+                                    <li><a class="dropdown-item" href="#">Search</a></li>
+                                    <li><a class="dropdown-item" href="#">Web Push and Notification APIs</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="dropdown-item lead" href="#">Earn</a>
+                                <ul>
+                                    <li><a class="dropdown-item" href="#">AdMob</a></li>
+                                    <li><a class="dropdown-item" href="#">Google Ads API</a></li>
+                                    <li><a class="dropdown-item" href="#">Google Pay</a></li>
+                                    <li><a class="dropdown-item" href="#">Google Play Billing</a></li>
+                                    <li><a class="dropdown-item" href="#">Interactive Media Ads</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <a class="nav-link" href="#">Solutions</a>
+                    <a class="nav-link" href="#">Events</a>
+                    <a class="nav-link px-2" href="#">Learn</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="true">
+                            Community
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Groups</a>
+                                <ul>
+                                    <li><a class="dropdown-item" href="#">Google Developer Groups</a></li>
+                                    <li><a class="dropdown-item" href="#">Google Developer Student Clubs</a></li>
+                                    <li><a class="dropdown-item" href="#">Women Techmakers</a></li>
+                                    <li><a class="dropdown-item" href="#">Google Developer Experts</a></li>
+                                    <li><a class="dropdown-item" href="#">tech Equity Collective</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="dropdown-item" href="#">Programs</a>
+                                <ul>
+                                    <li><a class="dropdown-item" href="#">Accelarator</a></li>
+                                    <li><a class="dropdown-item" href="#">Solution Challenge</a></li>
+                                    <li><a class="dropdown-item" href="#">Devfest</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="dropdown-item" href="#">Stories</a>
+                                <ul>
+                                    <li><a class="dropdown-item" href="#">All Stories</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="true">
+                            More
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Developer Files</a></li>
+                            <li><a class="dropdown-item" href="#">Blog</a></li>
+                        </ul>
+                    </li>
+                    <form class="d-flex flex-row-reverse" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    </form>
+                </div>
+            </div>
+            <div class="order-4">
+                <select name="Lang" id="lang1">
+                    <option value="English">English</option>
+                    <option value="Bahash Indonesia">Bahash Indonesia</option>
+                    <option value="Deutsch">Deutsch</option>
+                    <option value="Español">Español</option>
+                    <option value="Español América Latina">Español América Latina</option>
+                    <option value="Français">Français</option>
+                    <option value="Italino">Italiano</option>
+                    <option value="Polski">Polski</option>
+                    <option value="Português Brasil">Português Brasil</option>
+                    <option value="Tiếng Việt">Tiếng Việt</option>
+                    <option value="Türkçe">Türkçe</option>
+                    <option value="Русский ">Русский</option>
+                    <option value="עברית">עברית</option>
+                    <option value="العربيّة">العربيّة</option>
+                    <option value="فارسی">فارسی</option>
+                    <option value="हिंदी">हिंदी</option>
+                    <option value="বাংলা">বাংলা</option>
+                    <option value="ภาษาไทย">ภาษาไทย</option>
+                    <option value="中文 简体">中文 简体</option>
+                    <option value="中文 繁體">中文 繁體</option>
+                    <option value="日本語">日本語</option>
+                    <option value="한국어">한국어</option>
+                </select>
+            </div>
+            <div class="sign-btn order-5">
+                <button type="button" class="btn btn-link">Sign</button>
+            </div>
+        </div>
+    </nav>
+    <div class="sec-one">
+        <div class="container-fluid py-5 px-4 overflow-hidden">
+            <div class="row gx-5">
+                <div class="col">
+                    <div class="sec-one-left p-3 pt-5 ">
+                        <h3 id="build-smartship-faster">
+                            Build smarter, ship faster
+                        </h3>
+                        <p id="description-down">
+                            Unlock creativity and simplify your workflow with open, integrated solutions.
+                        </p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="sec-one-right p-2 object-fit-cover">
+                        <video class="right-video" autoplay muted loop>
+                            <source src="Video/build-smarter.mp4" type="video/mp4">
+                        </video>
+                        <div class="rightside-btn">
+                            <div class="im-building-for ps-3 fw-bolder fs-4">
+                                I'm building for:
+                            </div>
+                            <button type="button"
+                                class="btn btn-outline-dark ps-3 align-content-center mx-2 my-3">Mobile<i
+                                    class="bi bi-arrow-right ps-1"></i></button>
+                            <button type="button" class="btn btn-outline-dark ps-3 align-content-center mx-2 my-3">Web<i
+                                    class="bi bi-arrow-right ps-1"></i></button>
+                            <button type="button" class="btn btn-outline-dark ps-3 align-content-center mx-2 my-3">AI<i
+                                    class="bi bi-arrow-right ps-1"></i></button>
+                            <button type="button"
+                                class="btn btn-outline-dark ps-3 align-content-center mx-2 my-3">Cloud<i
+                                    class="bi bi-arrow-right ps-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sec-two">
+        <div class="container-fluid py-4">
+            <div class="featured-products py-3 ">
+                Featured Products
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="card text-center" style="min-height: 100%;">
+                        <a href="#" class="p-2 py-3">
+                            <img src="ICON/Android_Robot.png" class="card-img " alt="Android Robot" id="android-robot">
+                            <div class="card-body">
+                                <h5 class="card-title">Android</h5>
+                                <p class="card-text">Modern tools to help you build experiences that people love across
+                                    every Android device.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="card text-center" style="min-height: 100%;">
+                        <a href="#" class="p-2 py-3">
+                            <img src="ICON/google_cloud_64dp.png" class="card-img " alt="Google Cloud"
+                                id="android-robot">
+                            <div class="card-body">
+                                <h5 class="card-title">Google Cloud</h5>
+                                <p class="card-text">Build apps faster, make smarter business decisions, and connectn
+                                    people everywhere.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="card text-center" style="min-height: 100%;">
+                        <a href="#" class="p-2 py-3">
+                            <img src="ICON/tensorflow-logo-196.png" class="card-img " alt="TensorFlow"
+                                id="android-robot">
+                            <div class="card-body">
+                                <h5 class="card-title">TensorFlow</h5>
+                                <p class="card-text">An end-to-end platform that makes it easy to build and deploy ML
+                                    models in any environment.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="card text-center" style="min-height: 100%;">
+                        <a href="#" class="p-2 py-3">
+                            <img src="ICON/chromeos-logo.svg" class="card-img " alt="Chrome" id="android-robot">
+                            <div class="card-body">
+                                <h5 class="card-title">Google Chrome</h5>
+                                <p class="card-text">Modern tools and features that help you build high quality web
+                                    experiences.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row py-3">
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="card text-center" style="min-height: 100%;">
+                        <a href="#" class="p-2 py-3">
+                            <img src="ICON/play_prism_64dp.png" class="card-img " alt="Play Prism" id="android-robot">
+                            <div class="card-body">
+                                <h5 class="card-title">Google Play</h5>
+                                <p class="card-text">Grow your business, improve app quality, engage your audience, and
+                                    earn revenue.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="card text-center" style="min-height: 100%;">
+                        <a href="#" class="p-2 py-3">
+                            <img src="ICON/firebase_64dp.png" class="card-img " alt="Firebase" id="android-robot">
+                            <div class="card-body">
+                                <h5 class="card-title">Firebase</h5>
+                                <p class="card-text">An app development platform that helps you build and grow apps and
+                                    games users love.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="card text-center" style="min-height: 100%;">
+                        <a href="#" class="p-2 py-3">
+                            <img src="ICON/palm-logo.svg" class="card-img " alt="PaLM" id="android-robot">
+                            <div class="card-body">
+                                <h5 class="card-title">PaLM</h5>
+                                <p class="card-text">An easy and safe API to experiment with Google's large language
+                                    models.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="card text-center" style="min-height: 100%;">
+                        <a href="#" class="p-2 py-3">
+                            <img src="ICON/makersuite.png" class="card-img " alt="MakerSuite" id="android-robot">
+                            <div class="card-body">
+                                <h5 class="card-title">MakerSuite</h5>
+                                <p class="card-text">Quickly prototype generative AI applications in a browser - no ML
+                                    expertise or coding required.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row py-3">
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="card text-center" style="min-height: 100%;">
+                        <a href="#" class="p-2 py-3">
+                            <img src="ICON/flutter_64dp.png" class="card-img " alt="Flutter" id="android-robot">
+                            <div class="card-body">
+                                <h5 class="card-title">Flutter</h5>
+                                <p class="card-text">Build, test, and deploy beautiful web, mobile, desktop and embedded
+                                    apps from one codebase.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="card text-center" style="min-height: 100%;">
+                        <a href="#" class="p-2 py-3">
+                            <img src="ICON/google-ads.svg" class="card-img " alt="Google Ads" id="android-robot">
+                            <div class="card-body">
+                                <h5 class="card-title">Google Ads</h5>
+                                <p class="card-text">An app development platform that helps you build and grow apps and
+                                    games users love.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="card text-center" style="min-height: 100%;">
+                        <a href="#" class="p-2 py-3">
+                            <img src="ICON/kaggle.svg" class="card-img " alt="Kaggle" id="android-robot">
+                            <div class="card-body">
+                                <h5 class="card-title">Kaggle</h5>
+                                <p class="card-text">A platform to share machine learning data sets, explore and build
+                                    models, and compete in competitions.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="card text-center" style="min-height: 100%;">
+                        <a href="#" class="p-2 py-3">
+                            <img src="ICON/angular.png" class="card-img " alt="Angular" id="android-robot">
+                            <div class="card-body">
+                                <h5 class="card-title">Angular</h5>
+                                <p class="card-text">The web development framework for building the future.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-grid gap-2 col-3 mx-auto">
+            <button type="button" class="btn btn-primary btn-md my-5">
+                view all developer products
+            </button>
+        </div>
+    </div>
+    <div class="sec-four py-5">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-12 px-4">
+                <img src="IMG/giraffe_720.png" alt="giraffe" id="giraffe" class="img-fluid rounded-2">
+            </div>
+            <div class="col-lg-6 col-md-6 col-12">
+                <div class="whats-new fs-6 py-3">
+                    <span>WHAT'S NEW IN ANDROID</span>
+                </div>
+                <div class="android-studio-giraffe fw-bolder py-2">
+                    <a href="#">
+                        <span>Android Studio Giraffe is now stable</span>
+                    </a>
+                </div>
+                <div class="android-studio-giraffe-des fs-6 py-3">
+                    <p>Featuring updates to Live Edit, Compose animation previews, a new Device Explorer, and more.</p>
+                </div>
+                <button type="button" class="btn btn-primary btn-sm px-4">Download</button>
+            </div>
+        </div>
+    </div>
+    <div class="sec-five py-5">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-12 px-4">
+                <img src="IMG/explore-your-interests_720.jpg" alt="explore" id="explore"
+                    class="img-fluid rounded-end-2">
+            </div>
+            <div class="col-lg-6 col-md-6 col-12">
+                <div class="find-event-icon">
+                    <img src="ICON/explore-interests-eyebrow.svg" alt="explore-interest" id="explore-interest"
+                        class="img-fluid">
+                </div>
+                <div class="find-an-event py-4">
+                    <a href="#">
+                        <span>Find an Event</span>
+                    </a>
+                </div>
+                <div class="find-a-event-des py-3">
+                    <p>Grow your knowledge through online and in-person developer events.</p>
+                </div>
+                <button type="button" class="btn btn-outline-primary">View Events</button>
+            </div>
+        </div>
+    </div>
+    <div class="sec-six">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-12 px-4">
+                <div class="find-event-icon">
+                    <img src="ICON/technical-skills-eyebrow.svg" alt="technical-skills" id="technical"
+                        class="img-fluid">
+                </div>
+                <div class="improve-technical-skills py-3">
+                    <a href="#">
+                        <span>Improve technical skills</span>
+                    </a>
+                </div>
+                <div class="improve-technical-skills-des py-4">
+                    <p>Keep up with Google technology. Sharpen skills and master new ones.</p>
+                </div>
+                <button type="button" class="btn btn-outline-primary">Start Learning</button>
+            </div>
+            <div class="col-lg-6 col-md-6 col-12 px-4">
+                <img src="IMG/technical-skills_720.jpg" alt="Technical Skills" id="technical-skills"
+                    class="img-fluid rounded-end-2">
+            </div>
+        </div>
+    </div>
+    <div class="sec-seven py-5">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-12 px-4">
+                <img src="IMG/find-community_720.png" alt="explore" id="explore" class="img-fluid rounded-end-2">
+            </div>
+            <div class="col-lg-6 col-md-6 col-12">
+                <div class="find-event-icon">
+                    <img src="ICON/find-community-eyebrow.svg" alt="explore-interest" id="explore-interest"
+                        class="img-fluid">
+                </div>
+                <div class="find-an-event py-4">
+                    <a href="#">
+                        <span>Join a community</span>
+                    </a>
+                </div>
+                <div class="find-a-event-des py-3">
+                    <p>Meet a diverse network, no matter where you are on your developer journey.</p>
+                </div>
+                <button type="button" class="btn btn-outline-primary">View Events</button>
+            </div>
+        </div>
+    </div>
+    <div class="sec-eight">
+        <div class="container-fluid py-4">
+            <div class="google-for-developers py-3">
+                Follow Google for Developers
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-12 col-6">
+                    <div class="social-card" style="min-height: 100%;">
+                        <img src="ICON/yt.svg" alt="Youtube" class="img-fluid">
+                        <p class="mt-3">Youtube</p>
+                        <p>Subscribe to join a community of creative developers and learn the latest in Google
+                            technology.</p>
+                        <button type="button" class="btn btn-outline-primary">Learn More</button>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-12 col-6">
+                    <div class="social-card" style="min-height: 100%;">
+                        <img src="ICON/ig.png" alt="Instagram" class="img-fluid">
+                        <p class="mt-3">Instagram</p>
+                        <p>Follow and discover developer resources, community events, and inspirational stories.</p>
+                        <button type="button" class="btn btn-outline-primary">Learn More</button>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-12 col-6" style="min-height: 100%;">
+                    <div class="social-card">
+                        <img src="ICON/li_72.png" alt="Linkedln" class="img-fluid">
+                        <p class="mt-3">Linkedln</p>
+                        <p>Join a community of creative developers and learn how to use the latest in technology.</p>
+                        <button type="button" class="btn btn-outline-primary">Learn More</button>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-12 col-6" style="min-height: 100%;">
+                    <div class="social-card">
+                        <img src="ICON/x.svg" alt="X" class="img-fluid">
+                        <p class="mt-3">X</p>
+                        <p>Join the conversation to discover the latest developer tools, resources, events, and
+                            announcements.</p>
+                        <button type="button" class="btn btn-outline-primary">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="sec-nine">
+        <div class="row">
+            <div class="col-md-4 col-sm-6 px-5">
+                <h6>Connect</h6>
+                <a href="#" class="link-row">
+                    <p>Blog</p>
+                </a>
+                <a href="#" class="link-row">
+                    <p>Instagram</p>
+                </a>
+                <a href="#" class="link-row">
+                    <p>Linkedin</p>
+                </a>
+                <a href="#" class="link-row">
+                    <p>Twitter</p>
+                </a>
+                <a href="#" class="link-row">
+                    <p>Youtube</p>
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <h6>Programs</h6>
+                <a href="#" class="link-row">
+                    <p>Woman techmaker</p>
+                </a>
+                <a href="#" class="link-row">
+                    <p>Google Developer</p>
+                </a>
+                <a href="#" class="link-row">
+                    <p>Google Developer Experts</p>
+                </a>
+                <a href="#" class="link-row">
+                    <p>Accelerators</p>
+                </a>
+                <a href="#" class="link-row">
+                    <p>Google Developer Student Clubs</p>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <h6>Developer Console</h6>
+                <a href="#" class="link-row">
+                    <p>Google API Console</p>
+                </a>
+                <a href="#" class="link-row">
+                    <p>Google Cloud Platform Console</p>
+                </a>
+                <a href="#" class="link-row">
+                    <p>Google Play Console</p>
+                </a>
+                <a href="#" class="link-row">
+                    <p>Firebase Console</p>
+                </a>
+                <a href="#" class="link-row">
+                    <p>Actions On Google Console</p>
+                </a>
+                <a href="#" class="link-row">
+                    <p>Cast SDK Developer Console</p>
+                </a>
+                <a href="#" class="link-row">
+                    <p>Chrome Web Store Dashboard</p>
+                </a>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="section-ten-img">
+                    <a href="#"><img src="ICON/lockup-new.svg" alt="lockup new" id="lockup-new" width="219"
+                            height="32"></a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="section-ten-links">
+                    <a href="#" class="ten-links1">Android</a>
+                    <a href="#" class="ten-links2">Chrome</a>
+                    <a href="#" class="ten-links3">Firebase</a>
+                    <a href="#" class="ten-links4">Google Cloud Platform</a>
+                    <a href="#" class="ten-links5">All Products</a>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row py-2">
+            <div class="col-md-6">
+                <div class="footer-left">
+                    <div class="terms-link">
+                        <a href="#">Terms</a> |
+                        <a href="#">Privacy</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="footer-right">
+                    <div class="sign-up justify-content-end ">
+                        <p>Sign up for the Google for Developers newsletter</p>
+                    </div>
+                    <div class="subscribe">
+                        <button type="button" class="btn btn-primary btn-sm px-3">Subscribe</button>
+                    </div>
+                    <select name="Lang" id="lang1">
+                        <option value="English">English</option>
+                        <option value="Bahash Indonesia">Bahash Indonesia</option>
+                        <option value="Deutsch">Deutsch</option>
+                        <option value="Español">Español</option>
+                        <option value="Español América Latina">Español América Latina</option>
+                        <option value="Français">Français</option>
+                        <option value="Italino">Italiano</option>
+                        <option value="Polski">Polski</option>
+                        <option value="Português Brasil">Português Brasil</option>
+                        <option value="Tiếng Việt">Tiếng Việt</option>
+                        <option value="Türkçe">Türkçe</option>
+                        <option value="Русский ">Русский</option>
+                        <option value="עברית">עברית</option>
+                        <option value="العربيّة">العربيّة</option>
+                        <option value="فارسی">فارسی</option>
+                        <option value="हिंदी">हिंदी</option>
+                        <option value="বাংলা">বাংলা</option>
+                        <option value="ภาษาไทย">ภาษาไทย</option>
+                        <option value="中文 简体">中文 简体</option>
+                        <option value="中文 繁體">中文 繁體</option>
+                        <option value="日本語">日本語</option>
+                        <option value="한국어">한국어</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

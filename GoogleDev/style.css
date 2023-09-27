@@ -1,0 +1,267 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+a{
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+.container{
+    margin: 0px 80px;
+}
+
+.header-con{
+    margin: 0px 50px;
+}
+
+/* Header Menubar */
+
+header{
+    background-color: white;
+    color: black;
+    box-sizing: inherit;
+    box-shadow: 5px 10px 18px #888888;
+    font-family: Google Sans,Noto Sans,Noto Sans JP,Noto Sans KR,Noto Naskh Arabic,Noto Sans Thai,Noto Sans Hebrew,Noto Sans Bengali,sans-serif;
+}
+
+.header p{
+    padding: 2px 0px;
+    font: 400 24px 'Google Sans';
+}
+
+header .menubar{
+    display: flex;
+    align-items: center;
+    color: black;
+}
+
+header .menubar .logo{
+    flex: -1;
+    width: 216px;
+    height: var(32px);
+    padding-right: 30px;
+}
+
+li a:hover, .dropdown:hover .dropbtn {
+    background-color: white;
+}
+
+li.dropdown {
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+element.style {
+    padding-bottom: 22px;
+    padding-right: 16px;
+}
+
+.dropdown-content a {
+    color: black !important;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+  
+.dropdown-content a:hover {background-color: #f1f1f1;}
+  
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.fa-solid, .fas {
+    font-weight: 900;
+    color: black !important;
+}
+
+header .menubar .nav {
+    font-size: 14px;
+    padding-top: -12px;
+    flex: 1 1 0;
+}
+
+header .menubar .nav ul {
+    display: flex;
+    justify-content: space-between;
+}
+
+header .menubar .nav ul li {
+    padding: 20px;
+}
+
+input[type="search"] {
+    border: none;
+    background: transparent;
+    margin: 0;
+    padding: 7px 8px;
+    font-size: 14px;
+    color: inherit;
+    border: 1px solid transparent;
+    border-radius: inherit;
+    padding-top: 13px;
+  }
+  
+  input[type="search"]::placeholder {
+    color: #bbb;
+  }
+
+  /* Body Section */
+
+.slider-main{
+    display: flex;
+    flex-direction: row;
+}
+
+.leftside-text{
+    width: 50% ;
+    padding-top: 110px;
+}
+
+.right-side{
+    width: 50%;
+    height: 50px;
+}
+
+video{
+    height: 450px;
+    width: 645px;
+
+    padding-top: 45px;
+    object-fit: contain;
+    overflow-clip-margin: content-box;
+    overflow: clip;
+    
+
+}
+
+.leftside-text h1{
+    font: 700 70px 'Poppins', sans-serif !important;
+}
+
+/* .right-side .landing-row-item-buttons{
+    display: flex;
+    flex-direction: row;
+    margin-left: 70px;
+    margin-bottom: 0px;
+} */
+
+.right-side .landing-row-item-buttons .buttonM {
+    font: 300 16px  'Poppins', sans-serif !important;
+    margin: 20px 4px 4px 82px !important;
+    border:2px solid #202124;
+    border-radius: 4px 2px;
+    display: inline-flex;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    color: #1a73e8;
+
+}
+
+.buttonM .material-icons{
+    font-size: 18px;
+    height: 18px;
+    width: 18px;
+}
+.right-side .landing-row-item-buttons .buttonW {
+    font: 300 16px  'Poppins', sans-serif !important;
+    margin: 20px 4px 4px 12px !important;
+    border:2px solid #202124;
+    border-radius: 4px 2px;
+    display: inline-flex;
+    padding-left: 24px;
+    padding-right: 38px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    color: #1a73e8;
+    
+
+}
+
+.buttonW .material-icons{
+    font-size: 18px;
+    height: 18px;
+    width: 18px;
+}
+.right-side .landing-row-item-buttons .buttonA {
+    font: 300 16px  'Poppins', sans-serif !important;
+    margin: 20px 4px 4px 12px !important;
+    border:2px solid #202124;
+    border-radius: 4px 2px;
+    display: inline-flex;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    color: #1a73e8;
+
+}
+
+.buttonA .material-icons{
+    font-size: 18px;
+    height: 18px;
+    width: 18px;
+}
+.right-side .landing-row-item-buttons .buttonC {
+    font: 300 16px  'Poppins', sans-serif !important;
+    margin: 20px 4px 4px 12px !important;
+    border:2px solid #202124;
+    border-radius: 4px 2px;
+    display: inline-flex;
+    padding-left: 24px;
+    padding-right: 28px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    color: #1a73e8;
+}
+
+.buttonC .material-icons{
+    font-size: 18px;
+    height: 18px;
+    width: 18px;
+}
+
+.right-side .buttonM:hover{
+    background-color: #e8f0fe;
+}
+.right-side .buttonW:hover{
+    background-color: #e8f0fe;
+}
+.right-side .buttonA:hover{
+    background-color: #e8f0fe;
+}
+.right-side .buttonC:hover{
+    background-color: #e8f0fe;
+}
+
+.I-am-building{
+    font: 700 24px 'Google Sans';
+    margin-right: -82px;
+    vertical-align: middle;
+    height: 63px;
+    width: 185px;
+    margin-top: -54px !important;
+    margin-left: 82px !important;
+    margin-bottom: -45px !important;
+}
+
+/* Featured Products */
+.featured-cards .h2{
+    font: 700 40px 'Google Sans';
+}

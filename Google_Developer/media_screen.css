@@ -1,0 +1,29 @@
+@media screen and (max-width: 1440px) {
+
+}
+
+
+  @media screen and (max-width: 1024px) {
+      /* ============== header menubar ============= */
+  }
+
+  @media screen and (max-width: 768px) {
+   
+   .navbar{
+    display: flex;
+    flex-direction: row-r;
+   }
+  }
+
+  @media screen and (max-width: 425px) {
+    
+  }
+
+  @media screen and (max-width: 375px) {
+
+  }
+
+  @media screen and (max-width: 320px) {
+
+  
+  }

@@ -1,0 +1,169 @@
+.container{
+    padding: 0;
+}
+
+.navbar .nav-item .dropdown-menu{
+    margin-top:0;
+}
+
+.navbar .nav-item .dropdown-menu{
+    display: none;
+}
+
+.navbar .nav-item:hover .dropdown-menu{
+    display: block;
+}
+
+.nav-item{
+    display: flex;
+    flex-direction: row;
+}
+.dropdown-menu ul {
+    list-style: none;
+    padding: 0;
+    font-size: 12px;
+}
+
+.navbar-nav{
+    position: relative;
+}
+
+.sign-btn{
+    outline: none;
+}
+/* sec-one */
+
+#build-smartship-faster{
+    font: 700 90px 'Google Sans' !important;
+}
+
+#description-down{
+    font: 400 24px 'Google Sans';
+}
+
+.right-video{
+    border: 0;
+    max-width: 100%;
+}
+
+#im-building-for{
+    font: 700 24px 'Google Sans' !important;
+}
+
+.rightside-btn .btn{
+    background-color: white;
+}
+
+.rightside-btn .btn:hover{
+    background-color: #e8f0fe !important;
+}
+
+.sec-one a{
+    color: #1a73e8 !important;
+    text-decoration: none !important;
+}
+/* sec-two */
+
+
+.featured-products{
+    font: 700 48px 'Google Sans';
+    text-align: center;
+}
+
+#android-robot{
+    width: 64px;
+    max-height: 64px;
+
+}
+
+.card{
+    color: black !important;
+}
+
+.card.text-center{
+    min-height: 100% !important;
+    width: 100%;
+}
+
+.sec-two .devbtn{
+    justify-content: center;
+}
+
+
+/* Sec-four */
+
+.sec-four{
+    background: #f1f3f4 !important;
+}
+#giraffe{
+    width: 639px;
+    height: 359px;
+}
+.whats-new{
+    padding-top: 35px;
+    letter-spacing: 0.8px;
+    margin-bottom: 8px;
+}
+.android-studio-giraffe{
+    font: 700 48px 'Google Sans' !important;
+    margin-bottom: 24px;
+}
+
+/* Sec-Five */
+#explore{
+    border-radius: 10px;
+    height: 360px;
+    width: 639px;
+}
+.find-an-event{
+    font: 700 48px 'Google Sans';
+}
+.find-a-event-des{
+    font: 700 18px 'Roboto';
+}
+
+/* Sec-six */
+#technical-skills{
+    border-radius: 10px;
+    height: 360px;
+    width: 639px;
+}
+.improve-technical-skills{
+    font: 700 48px 'Google Sans';
+}
+.improve-technical-skills-des{
+    font: 700 18px 'Roboto';
+    line-height: 24px;
+}
+
+/* sec-eight */
+.sec-eight .social-card{
+    border: 1px solid #dadce0;
+    border-radius: 10px;
+    text-align: left;
+    padding: 25px;
+}
+.sec-eight #img-fluid{
+    max-width: 38px;
+    min-height: 38px;
+}
+.google-for-developers{
+    font: 700 48px 'Google Sans';
+    text-align: center;
+}
+a{
+    color: black !important;
+    text-decoration: none !important;
+}
+
+/* footer */
+.sign-up{
+    font: 400 14px 'Roboto';
+    padding-right: 30px;
+}
+.footer #lang1{
+    text-decoration: none;
+}
+.btn{
+    outline: black !important;
+}
