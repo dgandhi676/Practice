@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 25, 2023 at 12:05 PM
+-- Generation Time: Sep 29, 2023 at 10:25 AM
 -- Server version: 5.7.41
 -- PHP Version: 8.0.26
 
@@ -38,15 +38,15 @@ CREATE TABLE IF NOT EXISTS `employee` (
   `ot_completed_5_years` varchar(20) NOT NULL,
   `ot_profile` varchar(500) NOT NULL,
   PRIMARY KEY (`ot_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `employee`
 --
 
 INSERT INTO `employee` (`ot_id`, `ot_firstname`, `ot_lastname`, `ot_image`, `ot_email`, `ot_gender`, `ot_completed_5_years`, `ot_profile`) VALUES
-(9, 'dev', 'parekh', 'emp-image/20_1695643176.png', 'devgandhi1113@gmail.com', 'Male', 'No', 'hgggg'),
-(10, 'manan56456456', 'Gandhi', 'emp-image/2_1695643478.png', 'mananparekh812@gmail.com', 'Female', 'Yes', ' 1234'),
+(9, 'dev', 'parekh', 'emp-image/14_1695645463.png', 'devgandhi1113@gmail.com', 'Female', 'No', 'hgggg12334'),
+(10, 'manan56456456', 'Gandhi', 'emp-image/2_1695645449.png', 'mananparekh812@gmail.com', 'Female', 'Yes', ' 1234'),
 (11, 'vint', 'de', 'emp-image/17_1693825766.png', 'vbndn@gfgfg', 'Male', 'Yes', 'grgrweg'),
 (12, 'vint', 'Gandhi', 'emp-image/15_1693825090.png', 'mananparekh812@gmail.com', 'Female', 'No', 'Hi This Profile Descriptor.\r\n'),
 (13, 'dev', 'de', 'emp-image/18_1693825779.png', 'vbndn@gfgfg', 'Male', 'No', 'vfver'),
@@ -58,7 +58,10 @@ INSERT INTO `employee` (`ot_id`, `ot_firstname`, `ot_lastname`, `ot_image`, `ot_
 (25, 'Dhoni', 'Mahendra', 'emp-image/16_1695642445.png', 'msdhoni@gmail.com', 'Male', 'Yes', 'Retired Cricketer'),
 (26, 'Ishita', 'Gandhi', 'emp-image/3_1695642577.png', 'walan7072@gmail.com', 'Male', 'No', 'dvd'),
 (27, 'Ishita', 'Gandhi', 'emp-image/4_1695642734.png', 'rsharma@gmail.com', 'Female', 'No', 'nyujnm7u'),
-(28, 'Ishita', 'Gandhi', 'emp-image/14_1695642869.png', 'rsharma@gmail.com', 'Female', 'No', 'cdecvwerv');
+(28, 'Ishita', 'Gandhi', 'emp-image/14_1695642869.png', 'rsharma@gmail.com', 'Female', 'No', 'cdecvwerv'),
+(29, 'eddy', 'Philis', 'emp-image/14_1695645533.png', 'dgfdsgsdg@fgnn.com', 'Male', 'Yes', 'bfbhdfhndfhd'),
+(30, 'Hritik', 'Roshan', 'emp-image/5_1695646001.png', 'drosha@gmail.com', 'Male', 'Yes', '+25 Years Acting Experience'),
+(31, 'Rohit', 'ji123', 'emp-image/4_1695703878.png', 'gsdgdg@ggg.com', 'Male', 'No', 'FFggfd1234576');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
