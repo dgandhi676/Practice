@@ -30,6 +30,9 @@ if (isset($_POST['submit'])) {
     $gender = $_POST['gender'];
     //    print_r ($gender);
     //    die;
+    $country = $_POST['country'];
+    $state = $_POST['state'];
+    $city = $_POST['city'];
     $complete = $_POST['complete'];
     if (!empty($complete)) {
         $complete5 = implode(",", $complete);
@@ -39,7 +42,7 @@ if (isset($_POST['submit'])) {
 
     $profiledes = $_POST['profiledes'];
 
-    $sqli = "INSERT INTO employee (ot_firstname, ot_lastname, ot_phoneno, ot_dob, ot_image, ot_email, ot_gender, ot_completed_5_years, ot_profile) values ('$fname', '$lname', '$monumber', '$dob', '$folder1', '$email', '$gender', '$complete5', '$profiledes')";
+    $sqli = "INSERT INTO employee (ot_firstname, ot_lastname, ot_phoneno, ot_dob, ot_image, ot_email, ot_gender, ot_country, ot_state, ot_city, ot_completed_5_years, ot_profile) values ('$fname', '$lname', '$monumber', '$dob', '$folder1', '$email', '$gender', '$country', '$state', '$city', '$complete5', '$profiledes')";
 
     if (mysqli_query($conn, $sqli)) {
         echo "ADDED EMPLOYEE RECORD";
@@ -60,7 +63,8 @@ if (isset($_POST['submit'])) {
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Select CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css">
 
 </head>
 
@@ -74,12 +78,14 @@ if (isset($_POST['submit'])) {
                     </h2>
                 </div>
                 <div class="card-body">
-                    <form action="" method="post" id="teamform" enctype="multipart/form-data" onsubmit="return validateform()">
+                    <form action="" method="post" id="teamform" enctype="multipart/form-data"
+                        onsubmit="return validateform()">
 
                         <div class="row g-3">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <label for="fname" class="form-label">First Name:</label>
-                                <input type="text" class="form-control" id="fname" name="fname" aria-describedby="fnameHelp">
+                                <input type="text" class="form-control" id="fname" name="fname"
+                                    aria-describedby="fnameHelp">
                                 <div id="fnameHelp" class="form-text">Enter your first name.</div>
                             </div>
                         </div>
@@ -89,7 +95,8 @@ if (isset($_POST['submit'])) {
                         <div class="row g-3">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <label for="lname" class="form-label">Last Name:</label>
-                                <input type="text" class="form-control" id="lname" name="lname" aria-describedby="lnameHelp">
+                                <input type="text" class="form-control" id="lname" name="lname"
+                                    aria-describedby="lnameHelp">
                                 <div id="lnameHelp" class="form-text">Enter your last name.</div>
                             </div>
                         </div>
@@ -99,7 +106,8 @@ if (isset($_POST['submit'])) {
                         <div class="row g-3">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <label for="monumber" class="form-label">Mobile Number:</label>
-                                <input type="tel" id="monumber" class="form-control" name="monumber" aria-describedby="monumberHelp" pattern="[0-9]{10}">
+                                <input type="tel" id="monumber" class="form-control" name="monumber"
+                                    aria-describedby="monumberHelp" pattern="[0-9]{10}">
                                 <div id="monumberHelp" class="form-text">Enter Your Phone Number.</div>
                             </div>
                         </div>
@@ -119,7 +127,8 @@ if (isset($_POST['submit'])) {
                         <div class="row g-3">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <label for="empimg" class="form-label">Upload Image:</label>
-                                <input class="form-control" type="file" id="empimg" name="empimg" aria-describedby="empimgHelp">
+                                <input class="form-control" type="file" id="empimg" name="empimg"
+                                    aria-describedby="empimgHelp">
                                 <div id="empimgHelp" class="form-text">Choose an image to upload.</div>
                             </div>
                         </div>
@@ -129,7 +138,8 @@ if (isset($_POST['submit'])) {
                         <div class="row g-3">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <label for="email" class="form-label">Email Address:</label>
-                                <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com">
+                                <input type="email" class="form-control" name="email" id="email"
+                                    placeholder="name@example.com">
                             </div>
                         </div>
 
@@ -155,8 +165,8 @@ if (isset($_POST['submit'])) {
 
                         <div class="row g-3">
                             <div class="col-sm-12 col-md-12 col-lg-12">
-                                <label for="country" class="form-label">Select Country:</label>
-                                <select class="selectpicker countrypicker" data-flag="true" ></select>
+                                <label for="country">Select Country:</label>
+                                <select id="country" class="form-select"></select>
                             </div>
                         </div>
 
@@ -164,8 +174,8 @@ if (isset($_POST['submit'])) {
 
                         <div class="row g-3">
                             <div class="col-sm-12 col-md-12 col-lg-12">
-                                <label for="state" class="form-label">State:</label>
-                                <select class="selectpicker form-control" data-live-search="true" id="state" name="state" disabled>
+                                <label for="state">Select State:</label>
+                                <select id="state" class="form-select" disabled></select>
                                 </select>
                             </div>
                         </div>
@@ -174,8 +184,8 @@ if (isset($_POST['submit'])) {
 
                         <div class="row g-3">
                             <div class="col-sm-12 col-md-12 col-lg-12">
-                                <label for="city" class="form-label">City:</label>
-                                <select class="selectpicker form-control" data-live-search="true" id="city" name="city" disabled>
+                                <label for="city">Select City:</label>
+                                <select id="city" class="form-select" disabled></select>
                                 </select>
                             </div>
                         </div>
@@ -203,7 +213,8 @@ if (isset($_POST['submit'])) {
                         <div class="row g-3">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <div class="form-floating">
-                                    <textarea class="form-control form-control-lg" name="profiledes" id="profiledes" style="height: 100px;"></textarea>
+                                    <textarea class="form-control form-control-lg" name="profiledes" id="profiledes"
+                                        style="height: 100px;"></textarea>
                                     <label for="profiledes">Profile Description:</label>
                                 </div>
                             </div>
@@ -226,7 +237,6 @@ if (isset($_POST['submit'])) {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
-        $('.countrypicker').countrypicker();
     </script>
     <script>
         function validateform() {
@@ -271,6 +281,87 @@ if (isset($_POST['submit'])) {
                 return false;
             }
         }
+        // Select the dropdown element
+        const countryDropdown = document.getElementById('country');
+
+        // Fetch countries from the API
+        fetch('https://restcountries.com/v3.1/all')
+            .then(response => response.json())
+            .then(data => {
+                // Loop through the data and populate the dropdown options
+                data.forEach(country => {
+                    const option = document.createElement('option');
+                    option.value = country.name.common;
+                    option.text = country.name.common;
+                    countryDropdown.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+
+        // Select the state dropdown element
+        const stateDropdown = document.getElementById('state');
+
+        // Event listener for country dropdown change
+        countryDropdown.addEventListener('change', () => {
+            const selectedCountry = countryDropdown.value;
+
+            // Enable the state dropdown
+            stateDropdown.disabled = false;
+
+            // Clear existing options
+            stateDropdown.innerHTML = '<option value="">Select State</option>';
+
+            // Fetch states based on the selected country
+            fetch(`https://api.countrystatecity.in/v1/states`, {
+                headers: {
+                    'X-CSCAPI-KEY': 'YOUR_API_KEY', // Replace with your actual API key
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Loop through the data and populate the state dropdown options
+                    data.forEach(state => {
+                        const option = document.createElement('option');
+                        option.value = state.iso2;
+                        option.text = state.name;
+                        stateDropdown.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        });
+
+        // Select the city dropdown element
+        const cityDropdown = document.getElementById('city');
+
+        // Event listener for state dropdown change
+        stateDropdown.addEventListener('change', () => {
+            const selectedState = stateDropdown.value;
+
+            // Enable the city dropdown
+            cityDropdown.disabled = false;
+
+            // Clear existing options
+            cityDropdown.innerHTML = '<option value="">Select City</option>';
+
+            // Fetch cities based on the selected state
+            fetch(`https://api.countrystatecity.in/v1/countries/${selectedCountry}/states/${selectedState}/cities`, {
+                headers: {
+                    'X-CSCAPI-KEY': 'YOUR_API_KEY', // Replace with your actual API key
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Loop through the data and populate the city dropdown options
+                    data.forEach(city => {
+                        const option = document.createElement('option');
+                        option.value = city.name;
+                        option.text = city.name;
+                        cityDropdown.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        });
+
     </script>
 </body>
 
