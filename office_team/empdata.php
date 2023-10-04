@@ -25,9 +25,14 @@ $run1 = mysqli_query($conn, $sql);
                         <th>ID</th>
                         <th>First Name</th>
                         <th>Last Name</th>
+                        <th>Phone Number</th>
+                        <th>BirthDate</th>
                         <th>Image</th>
                         <th>E-Mail</th>
                         <th>Gender</th>
+                        <th>Country</th>
+                        <th>State</th>
+                        <th>City</th>
                         <th>Completed 5 Years</th>
                         <th>Profile Description</th>
                         <th colspan="2">Action</th>
@@ -52,9 +57,14 @@ $run1 = mysqli_query($conn, $sql);
             <td>" . $result['ot_id'] . "</td>
             <td>" . $result['ot_firstname'] . "</td>
             <td>" . $result['ot_lastname'] . "</td>
+            <td>" . $result['ot_phoneno'] . "</td>
+            <td>" . date('d M Y', strtotime($result['ot_dob'])) . "</td>
             <td><img src='" . $result['ot_image'] . "' height='75px' width='75px'></td>
             <td>" . $result['ot_email'] . "</td>
             <td>" . $result['ot_gender'] . "</td>
+            <td>" . $result['ot_country'] . "</td>
+            <td>" . $result['ot_state'] . "</td>
+            <td>" . $result['ot_city'] . "</td>
             <td>" . $result['ot_completed_5_years'] . "</td>
             <td>" . $result['ot_profile'] . "</td>
             
