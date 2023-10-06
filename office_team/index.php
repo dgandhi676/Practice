@@ -1,8 +1,8 @@
 <?php
 include 'db_connect.php';
 if (isset($_POST['submit'])) {
-    print_r($_POST);
-    die();
+    // print_r($_POST);
+    // die();
     $fname = $_POST['fname'];
     //    echo "First Name : ".$empfname;
     $lname = $_POST['lname'];
@@ -112,7 +112,7 @@ if (isset($_POST['submit'])) {
 
                             <div class="col-md-6">
                                 <label for="empimg" class="form-label">Upload Image:</label>
-                                <input class="form-control" type="file" accept="image/png, image/gif, image/jpeg, image/jpg" id="empimg" name="empimg" aria-describedby="empimgHelp">
+                                <input class="form-control" type="file" accept="image/png, image/gif, image/jpeg, image/jpg" id="empimg" name="empimg" onchange="validateImageSize(this)">
                             </div>
 
                             <br>
@@ -125,7 +125,7 @@ if (isset($_POST['submit'])) {
                             <br>
 
                             <div class="col-mb-3">
-                                <label class="form-label">Gender:</label>
+                                <label class="form-label" name="gender" value="gender" id="gender">Gender:</label>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="gender" id="Male" value="Male">
                                     <label class="form-check-label" for="Male">
@@ -163,7 +163,6 @@ if (isset($_POST['submit'])) {
                             <div class="col-md-4">
                                 <label for="city" class="form-label">Select City:</label>
                                 <select class="form-select city" id="city" name="city">
-
                                     <option value="">Select City</option>
                                 </select>
                             </div>
@@ -171,15 +170,15 @@ if (isset($_POST['submit'])) {
                             <br>
 
                             <div class="col-mb-3">
-                                <label class="form-label" class="form-label">5 Years Completed:</label>
+                                <label class="form-label" name="complete" value="complete" id="complete">5 Years Completed:</label>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="complete[]" value="Yes" id="Yes">
+                                    <input class="form-check-input" type="checkbox" name="complete[]" value="Yes" id="Yes" required>
                                     <label class="form-check-label" for="Yes">
                                         Yes
                                     </label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="complete[]" value="No" id="No">
+                                    <input class="form-check-input" type="checkbox" name="complete[]" value="No" id="No" required>
                                     <label class="form-check-label" for="No">
                                         No
                                     </label>
@@ -190,15 +189,14 @@ if (isset($_POST['submit'])) {
 
                             <div class="col-md-12">
                                 <div class="form-floating">
-                                    <textarea class="form-control form-control-lg" name="profiledes" id="profiledes" style="height: 100px;"></textarea>
-                                    <label for="profiledes">Profile Description:</label>
+                                    <textarea class="form-control form-control-md" name="profiledes" id="profiledes" style="height: 100px;"></textarea>
+                                    <label for="profiledes" name="profiledes" id="profiledes" value="profiledes">Profile Description:</label>
                                 </div>
                             </div>
                         </div>
                         <br>
                         <div class="col-12">
-                            <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit
-                                Details</button>
+                            <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit Details</button>
                         </div>
                     </form>
                 </div>

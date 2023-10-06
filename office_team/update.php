@@ -66,51 +66,8 @@ if (isset($_POST['update'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Member</title>
-    <!-- Bootstrap -->
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script>
-        function validateform() {
-            let a = document.forms['teamform']['fname'].value;
-            if (a == "") {
-                alert("Employee First Name is Empty!!");
-                return false;
-            }
-            let b = document.forms['teamform']['lname'].value;
-            if (b == "") {
-                alert("Employee Last Name is Empty!!");
-                return false;
-            }
-            let c = document.getElementById("empimg");
-            let j = c.value;
-            let allowesEx = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
-            if (!allowesEx.test(j)) {
-                alert("Please Upload file having extensions .jpeg/.jpg/.png/.gif only. !!");
-                c.value = '';
-                return false;
-            }
-            let d = document.forms['teamform']['email'].value;
-            if (d == "") {
-                alert("Please Enter Your E-Mail!!!");
-                return false;
-            }
-            let e = document.getElementById("Male").checked;
-            let f = document.getElementById("Female").checked;
-            if (!e && !f) {
-                alert("Select a Gender");
-                return false;
-            }
-            let g = document.querySelectorAll('input[name="complete[]"]:checked');
-            if (g.length === 0) {
-                alert("Select Atleast One Option");
-                return false;
-            }
-            let h = document.forms["teamform"]["profiledes"].value;
-            if (h == "") {
-                alert("Please Enter Profile Description!!!");
-                return false;
-            }
-        }
-    </script>
 </head>
 
 <body>
@@ -234,7 +191,14 @@ if (isset($_POST['update'])) {
                 </div>
             </div>
         </div>
+        <!-- Bootstrap JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Bootstrap Pooper JS -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!-- Custom scripts -->
+        <script type="text/javascript" src="script.js"></script>
 </body>
 
 </html>

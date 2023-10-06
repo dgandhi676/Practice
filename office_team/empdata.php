@@ -1,7 +1,31 @@
 <?php
 include 'db_connect.php';
-$sql = "SELECT * FROM employee ORDER BY ot_id ASC";
+// $sql = "SELECT * FROM employee ORDER BY ot_id ASC";
+// $run1 = mysqli_query($conn, $sql);
+
+// Define how many records to display per page
+$records_per_page = 5;
+
+// Get the current page number from the query string
+if (isset($_GET['page']) && is_numeric($_GET['page'])) {
+    $current_page = intval($_GET['page']);
+} else {
+    $current_page = 1;
+}
+
+// Calculate the offset for the query based on the current page number
+$offset = ($current_page - 1) * $records_per_page;
+
+// Query to retrieve records with pagination
+$sql = "SELECT * FROM employee ORDER BY ot_id ASC LIMIT $offset, $records_per_page";
 $run1 = mysqli_query($conn, $sql);
+
+// Count total number of records
+$total_records = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM employee"));
+
+// Calculate total number of pages
+$total_pages = ceil($total_records / $records_per_page);
+
 ?>
 
 <!DOCTYPE html>
@@ -11,9 +35,10 @@ $run1 = mysqli_query($conn, $sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Database</title>
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body style="text-align:center;">
     <div class="container" style="margin-top: 50px;">
         <h2>Employee Records</h2>
@@ -72,11 +97,38 @@ $run1 = mysqli_query($conn, $sql);
             <td><a href='delete.php?id=" . $result['ot_id'] . "' class='btn btn-danger btn-sm'>DELETE</a>
             </td>
             </tr>";
-            
                     }
                 }
                 ?>
             </table>
+
+            <div class="pagination justify-content-center">
+                <ul class="pagination">
+                    <?php
+                    if ($current_page > 1) {
+                        echo '<li class="page-item"><a class="page-link" href="?page=' . ($current_page - 1) . '">Previous</a></li>';
+                    }
+
+                    for ($i = 1; $i <= $total_pages; $i++) {
+                        if ($i == $current_page) {
+                            echo '<li class="page-item active"><span class="page-link">' . $i . '</span></li>';
+                        } else {
+                            echo '<li class="page-item"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+                        }
+                    }
+
+                    if ($current_page < $total_pages) {
+                        echo '<li class="page-item"><a class="page-link" href="?page=' . ($current_page + 1) . '">Next</a></li>';
+                    }
+                    ?>
+                </ul>
+            </div>
+            <!-- Bootstrap JS -->
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-        </body>
-        </html>
+            <!-- Bootstrap Pooper JS -->
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+            <!-- jQuery -->
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+
+</html>
