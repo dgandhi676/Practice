@@ -36,17 +36,29 @@ function validateform() {
     return false;
   }
 
+  let imagehidden = $("#hiddenimg").val();
   let fileInput = document.getElementById("empimg");
   let file = fileInput.files[0];
-  const allowedMimeTypes = ["image/jpeg", "image/png", "image/gif", "image/jpg"];
-  if (!file || file.size > 100000 || !allowedMimeTypes.includes(file.type)) {
+  const allowedMimeTypes = [
+    "image/jpeg",
+    "image/png",
+    "image/gif",
+    "image/jpg",
+  ];
+  if (imagehidden) {
+    return true;
+  } else if (
+    !file ||
+    file.size > 100000 ||
+    !allowedMimeTypes.includes(file.type)
+  ) {
     showTooltip(
       "empimg",
       "Please Upload Image (maximum size: 100KB, allowed file types: JPEG, PNG, GIF)."
     );
     return false;
   }
-  
+
   let email = document.forms["teamform"]["email"].value;
   if (!emailRegex.test(email)) {
     showTooltip(
@@ -158,6 +170,16 @@ let config = {
 
 let countrySelect, stateSelect, citySelect;
 
+window.onload = function () {
+  countrySelect = document.getElementById("country");
+  stateSelect = document.getElementById("state");
+  citySelect = document.getElementById("city");
+
+  loadCountries();
+  loadStates();
+  loadCities();
+};
+
 document.addEventListener("DOMContentLoaded", function () {
   countrySelect = document.getElementById("country");
   stateSelect = document.getElementById("state");
@@ -168,9 +190,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function loadCountries() {
   let apiEndPoint = config.cUrl;
-
   stateSelect.innerHTML = '<option value="">Select State</option>';
   citySelect.innerHTML = '<option value="">Select City</option>';
+  var getCountry = $("#hiddencountry").val();
+  // console.log("Hidden Country Code: " + getCountry);
 
   fetch(apiEndPoint, {
     headers: {
@@ -184,6 +207,9 @@ function loadCountries() {
       data.forEach((country) => {
         const option = document.createElement("option");
         option.value = country.iso2;
+        if (getCountry === country.iso2) {
+          option.selected = true;
+        }
         option.textContent = country.name;
         countrySelect.appendChild(option);
       });
@@ -203,25 +229,28 @@ function loadStates() {
   citySelect.style.pointerEvents = "none";
 
   const selectedCountryCode = countrySelect.value;
-  // console.log(selectedCountryCode);
   stateSelect.innerHTML = '<option value="">Select State</option>';
   citySelect.innerHTML = '<option value="">Select City</option>';
+  var getCountry = $("#hiddencountry").val();
+  var getState = $("#hiddenstate").val();
+  // console.log("Hidden State Code: " + getState);
 
-  fetch(`${config.cUrl}/${selectedCountryCode}/states`, {
+  fetch(`${config.cUrl}/${(getCountry, selectedCountryCode)}/states`, {
     headers: {
       "X-CSCAPI-KEY": config.ckey,
     },
   })
     .then((Response) => Response.json())
     .then((data) => {
-      // console.log(data);
-
+      // console.log("API Response:", data);
       data.forEach((state) => {
         const option = document.createElement("option");
         option.value = state.iso2;
+        if (getState === state.iso2) {
+          option.selected = true;
+        }
         option.textContent = state.name;
         stateSelect.appendChild(option);
-        stateSelect.selectedIndex = 0;
       });
     })
     .catch((error) => console.error("Error loading states:", error));
@@ -230,23 +259,32 @@ function loadStates() {
 function loadCities() {
   citySelect.disabled = false;
   citySelect.style.pointerEvents = "auto";
-
   const selectedCountryCode = countrySelect.value;
   const selectedStateCode = stateSelect.value;
 
-  // Reset city selection to default value
   citySelect.innerHTML = '<option value="">Select City</option>';
   citySelect.value = "";
+  var getCountry = $("#hiddencountry").val();
+  var getState = $("#hiddenstate").val();
+  var getCity = $("#hiddencity").val();
+  // console.log("Hidden City Name: " + getCity);
 
   fetch(
-    `${config.cUrl}/${selectedCountryCode}/states/${selectedStateCode}/cities`,
-    { headers: { "X-CSCAPI-KEY": config.ckey } }
+    `${config.cUrl}/${(getCountry, selectedCountryCode)}/states/${
+      (getState, selectedStateCode)
+    }/cities`,
+    {
+      headers: { "X-CSCAPI-KEY": config.ckey },
+    }
   )
     .then((Response) => Response.json())
     .then((data) => {
       data.forEach((city) => {
         const option = document.createElement("option");
         option.value = city.name;
+        if (getCity === city.name) {
+          option.selected = true;
+        }
         option.textContent = city.name;
         citySelect.appendChild(option);
         citySelect.selectedIndex = 0;
@@ -254,5 +292,3 @@ function loadCities() {
     })
     .catch((error) => console.error("Error loading cities:", error));
 }
-
-window.onload = loadCountries;

@@ -8,12 +8,10 @@ if (isset($_POST['submit'])) {
     $lname = $_POST['lname'];
     $monumber = $_POST['monumber'];
     $dob = $_POST['dob'];
-
     $imgname = $_FILES['empimg']['name'];
     $tempname = $_FILES['empimg']['tmp_name'];
     $folder1 = "emp-image/" . $imgname;
     move_uploaded_file($tempname, $folder1);
-
     if (file_exists($folder1)) {
         $path_parts = pathinfo($folder1);
         if (isset($path_parts['extension'])) {
@@ -25,14 +23,11 @@ if (isset($_POST['submit'])) {
             }
         }
     }
-
-
     $email = $_POST['email'];
     $gender = $_POST['gender'];
     //    print_r ($gender);
     //    die;
     $country = $_POST['country'];
-
     $state = $_POST['state'];
     $city = $_POST['city'];
     //    print_r ($city) ;
@@ -43,11 +38,9 @@ if (isset($_POST['submit'])) {
     }
     // echo $empcomplete5;
     // die;
-
-    $profiledes = $_POST['profiledes'];
+    $profiledes = mysqli_real_escape_string($conn, $_POST['profiledes']);
 
     $sqli = "INSERT INTO employee (ot_firstname, ot_lastname, ot_phoneno, ot_dob, ot_image, ot_email, ot_gender, ot_country, ot_state, ot_city, ot_completed_5_years, ot_profile) values ('$fname', '$lname', '$monumber', '$dob', '$folder1', '$email', '$gender', '$country', '$state', '$city', '$complete5', '$profiledes')";
-
     if (mysqli_query($conn, $sqli)) {
         echo "ADDED EMPLOYEE RECORD";
         header('Location: http://localhost/Dev/office_team/empdata.php');
@@ -59,21 +52,17 @@ if (isset($_POST['submit'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Team Member</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-
 </head>
-
 <body>
     <div class="container d-flex justify-content-center align-items-center " style="min-height: 100vh;">
-        <div class="container-fluid mx-5">
-            <div class="card ">
+        <div class="container-fluid">
+            <div class="card">
                 <div class="card-header">
                     <h2 class="text-start">Add Team Member
                         <a href="empdata.php" class="btn btn-primary float-end ">Employee List</a>
@@ -86,44 +75,32 @@ if (isset($_POST['submit'])) {
                                 <label for="fname" class="form-label">First Name:</label>
                                 <input type="text" class="form-control" id="fname" name="fname" aria-describedby="fnameHelp" placeholder="Enter your first Name">
                             </div>
-
                             <br>
-
                             <div class="col-md-6">
                                 <label for="lname" class="form-label">Last Name:</label>
                                 <input type="text" class="form-control" id="lname" name="lname" aria-describedby="lnameHelp" placeholder="Enter your last Name">
                             </div>
-
                             <br>
-
                             <div class="col-md-6">
                                 <label for="monumber" class="form-label">Mobile Number:</label>
                                 <input type="tel" id="monumber" class="form-control" name="monumber" aria-describedby="monumberHelp" placeholder="Enter Your Phone Number" maxlength="10" minlength="10">
                             </div>
-
                             <br>
-
                             <div class="col-md-6">
                                 <label for="dob" class="form-label">Date of Birth:</label>
                                 <input type="date" class="form-control" id="dob" name="dob" placeholder="Select Your Birth Date." max="<?php echo date('Y-m-d'); ?>">
                             </div>
-
                             <br>
-
                             <div class="col-md-6">
                                 <label for="empimg" class="form-label">Upload Image:</label>
                                 <input class="form-control" type="file" accept="image/png, image/gif, image/jpeg, image/jpg" id="empimg" name="empimg" onchange="validateImageSize(this)">
                             </div>
-
                             <br>
-
                             <div class="col-md-6">
                                 <label for="email" class="form-label">Email Address:</label>
                                 <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com">
                             </div>
-
                             <br>
-
                             <div class="col-mb-3">
                                 <label class="form-label" name="gender" value="gender" id="gender">Gender:</label>
                                 <div class="form-check form-check-inline">
@@ -139,36 +116,28 @@ if (isset($_POST['submit'])) {
                                     </label>
                                 </div>
                             </div>
-
                             <br>
-
                             <div class="col-md-4">
                                 <label for="country" class="form-label">Select Country:</label>
                                 <select class="form-select country" id="country" name="country" onchange="loadStates()">
                                     <option value="">Select Country</option>
                                 </select>
                             </div>
-
                             <br>
-
                             <div class="col-md-4">
                                 <label for="state" class="form-label">Select State:</label>
                                 <select class="form-select state" id="state" name="state" onchange="loadCities()">
                                     <option value="">Select State</option>
                                 </select>
                             </div>
-
                             <br>
-
                             <div class="col-md-4">
                                 <label for="city" class="form-label">Select City:</label>
                                 <select class="form-select city" id="city" name="city">
                                     <option value="">Select City</option>
                                 </select>
                             </div>
-
                             <br>
-
                             <div class="col-mb-3">
                                 <label class="form-label" name="complete" value="complete" id="complete">5 Years Completed:</label>
                                 <div class="form-check form-check-inline">
@@ -184,9 +153,7 @@ if (isset($_POST['submit'])) {
                                     </label>
                                 </div>
                             </div>
-
                             <br>
-
                             <div class="col-md-12">
                                 <div class="form-floating">
                                     <textarea class="form-control form-control-md" name="profiledes" id="profiledes" style="height: 100px;"></textarea>
@@ -213,5 +180,4 @@ if (isset($_POST['submit'])) {
     <!-- Custom scripts -->
     <script type="text/javascript" src="script.js"></script>
 </body>
-
 </html>
