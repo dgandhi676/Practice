@@ -10,28 +10,32 @@ $data = $fet['ot_completed_5_years'];
 $data1 = explode(",", $data);
 // print_r($data1);
 if (isset($_POST['update'])) {
-    // print_r($_POST);
-    // die();
+    echo "<pre>";
+    print_r($_POST);
+    print_r($_FILES);
+    // die();  
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $monumber = $_POST['monumber'];
     $dob = $_POST['dob'];
-    $imgname = $_FILES['empimg']['name'];
-    $tempname = $_FILES['empimg']['tmp_name'];
-    $originalFilePath = "emp-image/" . $imgname;
-    if (file_exists($originalFilePath)) {
-        $path_parts = pathinfo($originalFilePath);
-        $timestamp = time();
-        $newFilename = $path_parts['filename'] . '_' . $timestamp . '.' . $path_parts['extension'];
-        $newFilePath = "emp-image/" . $newFilename;
-        if (rename($originalFilePath, $newFilePath)) {
-            $imgPath = $newFilePath;
-        } else {
-            $imgPath = $_POST['hiddenimg'];
+    if (!empty($_FILES['empimg']['name'])) {
+        $imgname = $_FILES['empimg']['name'];
+        $tempname = $_FILES['empimg']['tmp_name'];
+        $folder1 = "emp-image/" . $imgname;
+        move_uploaded_file($tempname, $folder1);
+        if (file_exists($folder1)) {
+            $path_parts = pathinfo($folder1);
+            if (isset($path_parts['extension'])) {
+                $timestamp = time();
+                $new_filename = $path_parts['filename'] . '_' . $timestamp . '.' . $path_parts['extension'];
+                $new_folder1 = "emp-image/" . $new_filename;
+                if (rename($folder1, $new_folder1)) {
+                    $folder1 = $new_folder1;
+                }
+            }
         }
-    } else {
-        move_uploaded_file($tempname, $originalFilePath);
-        $imgPath = $originalFilePath;
+    } else { 
+        $folder1 =$_POST['hiddenimg'];
     }
     $email = $_POST['email'];
     $gender = $_POST['gender'];
@@ -131,13 +135,13 @@ if (isset($_POST['update'])) {
                             <input type="hidden" name="hiddencountry" id="hiddencountry" value="<?php echo $fet['ot_country']; ?>">
                             <div class="col-md-4">
                                 <label for="country" class="form-label">Select Country:</label>
-                                <select class="form-select country" id="country" name="country" onload="loadStates()" onchange="loadStates()"></select>
+                                <select class="form-select country" id="country" name="country" onchange="loadStates(true)"></select>
                             </div>
                             <br>
                             <input type="hidden" name="hiddenstate" id="hiddenstate" value="<?php echo $fet['ot_state']; ?>">
                             <div class="col-md-4">
                                 <label for="state" class="form-label">Select State:</label>
-                                <select class="form-select state" id="state" name="state" onload="loadCities()" onchange="loadCities()"></select>
+                                <select class="form-select state" id="state" name="state" onchange="loadCities(true)"></select>
                             </div>
                             <br>
                             <input type="hidden" name="hiddencity" id="hiddencity" value="<?php echo $fet['ot_city']; ?>">

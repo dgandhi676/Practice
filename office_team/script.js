@@ -117,9 +117,7 @@ function showTooltip(elementId, message) {
   }, 2000);
 }
 
-document
-  .getElementById("teamform")
-  .addEventListener("submit", function (event) {
+document.getElementById("teamform").addEventListener("submit", function (event) {
     if (!validateform()) {
       event.preventDefault();
     }
@@ -192,15 +190,13 @@ function loadCountries() {
 
   stateSelect.disabled = true;
   citySelect.disabled = true;
-  stateSelect.style.pointerEvents = "none";
-  citySelect.style.pointerEvents = "none";
+
 }
 
 function loadStates() {
   stateSelect.disabled = false;
   citySelect.disabled = true;
-  stateSelect.style.pointerEvents = "auto";
-  citySelect.style.pointerEvents = "none";
+  
 
   const selectedCountryCode = countrySelect.value;
   // console.log(selectedCountryCode);
@@ -229,7 +225,7 @@ function loadStates() {
 
 function loadCities() {
   citySelect.disabled = false;
-  citySelect.style.pointerEvents = "auto";
+  // citySelect.style.pointerEvents = "auto";
 
   const selectedCountryCode = countrySelect.value;
   const selectedStateCode = stateSelect.value;

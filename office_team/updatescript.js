@@ -176,8 +176,6 @@ window.onload = function () {
   citySelect = document.getElementById("city");
 
   loadCountries();
-  loadStates();
-  loadCities();
 };
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -193,7 +191,6 @@ function loadCountries() {
   stateSelect.innerHTML = '<option value="">Select State</option>';
   citySelect.innerHTML = '<option value="">Select City</option>';
   var getCountry = $("#hiddencountry").val();
-  // console.log("Hidden Country Code: " + getCountry);
 
   fetch(apiEndPoint, {
     headers: {
@@ -202,8 +199,6 @@ function loadCountries() {
   })
     .then((Response) => Response.json())
     .then((data) => {
-      // console.log(data);
-
       data.forEach((country) => {
         const option = document.createElement("option");
         option.value = country.iso2;
@@ -213,82 +208,93 @@ function loadCountries() {
         option.textContent = country.name;
         countrySelect.appendChild(option);
       });
+      loadStates();
     })
     .catch((error) => console.error("Error loading countries:", error));
-
-  stateSelect.disabled = true;
-  citySelect.disabled = true;
-  stateSelect.style.pointerEvents = "none";
-  citySelect.style.pointerEvents = "none";
 }
 
-function loadStates() {
-  stateSelect.disabled = false;
-  citySelect.disabled = true;
-  stateSelect.style.pointerEvents = "auto";
-  citySelect.style.pointerEvents = "none";
+function loadStates(status = false) {
 
   const selectedCountryCode = countrySelect.value;
   stateSelect.innerHTML = '<option value="">Select State</option>';
   citySelect.innerHTML = '<option value="">Select City</option>';
-  var getCountry = $("#hiddencountry").val();
-  var getState = $("#hiddenstate").val();
-  // console.log("Hidden State Code: " + getState);
+  if(!status){
+    var getCountry = $("#hiddencountry").val();
+    var getState = $("#hiddenstate").val();
+  }else{
+    var getCountry = selectedCountryCode;  
+    citySelect.disabled = true;          
+  }
 
-  fetch(`${config.cUrl}/${(getCountry, selectedCountryCode)}/states`, {
+  fetch(`${config.cUrl}/${getCountry}/states`, {
     headers: {
       "X-CSCAPI-KEY": config.ckey,
     },
   })
     .then((Response) => Response.json())
     .then((data) => {
-      // console.log("API Response:", data);
-      data.forEach((state) => {
-        const option = document.createElement("option");
-        option.value = state.iso2;
-        if (getState === state.iso2) {
-          option.selected = true;
-        }
-        option.textContent = state.name;
-        stateSelect.appendChild(option);
-      });
+      if(data.length > 1){
+        stateSelect.disabled = false;
+        data.forEach((state) => {
+          const option = document.createElement("option");
+          option.value = state.iso2;
+          if (getState === state.iso2) {
+            option.selected = true;
+          }
+          option.textContent = state.name;
+          stateSelect.appendChild(option);
+        }); 
+      }else{
+        stateSelect.disabled = true;    
+        stateSelect.innerHTML = '<option value="">State Could Not Found.</option>';
+        citySelect.innerHTML = '<option value="">City Could Not Found.</option>';
+
+      }
+        
+      if(!status){  
+        loadCities();
+      }
+      
     })
     .catch((error) => console.error("Error loading states:", error));
 }
 
-function loadCities() {
-  citySelect.disabled = false;
-  citySelect.style.pointerEvents = "auto";
+function loadCities(status = false) {
   const selectedCountryCode = countrySelect.value;
   const selectedStateCode = stateSelect.value;
 
   citySelect.innerHTML = '<option value="">Select City</option>';
-  citySelect.value = "";
-  var getCountry = $("#hiddencountry").val();
-  var getState = $("#hiddenstate").val();
-  var getCity = $("#hiddencity").val();
-  // console.log("Hidden City Name: " + getCity);
-
-  fetch(
-    `${config.cUrl}/${(getCountry, selectedCountryCode)}/states/${
-      (getState, selectedStateCode)
-    }/cities`,
-    {
-      headers: { "X-CSCAPI-KEY": config.ckey },
-    }
-  )
+  // citySelect.value = "";
+  if(!status){
+    var getCountry = $("#hiddencountry").val();
+    var getState = $("#hiddenstate").val();
+    var getCity = $("#hiddencity").val();
+  }else{
+    var getCountry = selectedCountryCode;
+    var getState = selectedStateCode;
+    citySelect.disabled = false;    
+  }
+  
+  fetch(`${config.cUrl}/${getCountry}/states/${getState}/cities`, {
+    headers: { "X-CSCAPI-KEY": config.ckey },
+  })
     .then((Response) => Response.json())
     .then((data) => {
-      data.forEach((city) => {
-        const option = document.createElement("option");
-        option.value = city.name;
-        if (getCity === city.name) {
-          option.selected = true;
-        }
-        option.textContent = city.name;
-        citySelect.appendChild(option);
-        citySelect.selectedIndex = 0;
-      });
+      if(data.length > 1){
+        data.forEach((city) => {            
+          const option = document.createElement("option");
+          option.value = city.name;
+          if (getCity == city.name) {
+            
+            option.selected = true;
+          }
+          option.textContent = city.name;
+          citySelect.appendChild(option);
+        });
+      }else{
+        citySelect.innerHTML = '<option value="">City Not Found.</option>';
+      }
+      
     })
     .catch((error) => console.error("Error loading cities:", error));
 }
