@@ -1,5 +1,11 @@
 <?php
+session_start();
 include 'db_connect.php';
+// echo $_SESSION['randomString'];
+if (!isset($_SESSION['randomString'])) {
+    header("Location: login.php");
+    exit();
+}
 $records_per_page = 5;
 if (isset($_GET['page']) && is_numeric($_GET['page'])) {
     $current_page = intval($_GET['page']);
@@ -43,7 +49,10 @@ $total_pages = ceil($total_records / $records_per_page);
 </head>
 
 <body style="text-align:center;">
-    <h1 class="bg-primary text-light py-3">Employee Records</h1>
+    <h4 class="float-start py-4 px-3 text-white"> Welcome, <?php echo $_SESSION['fullname']; ?> </h4>
+    <h1 class="bg-primary text-light py-3 px-5">
+    Employee Records <button type="button" class="btn btn-danger mt-2 float-end mx-2" onclick="window.location.href='logout.php'">Logout</button></h1>
+    
     <div class="container-fluid">
         <div class="row my-3">
             <div class="col-10">

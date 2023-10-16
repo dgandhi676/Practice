@@ -1,28 +1,8 @@
 <?php
-include "db_connect.php";
 session_start();
-
-if (isset($_POST['username'])) {
-    $username = stripslashes($_REQUEST['username']);
-	$username = mysqli_real_escape_string($conn,$username);  
-    $password = stripslashes($_REQUEST['password']);
-    $password = mysqli_real_escape_string($conn, $password);
-
-    $query = "SELECT * FROM `user_registration` WHERE email='$email' and password='" . ($password) . "'";
-    $result = mysqli_query($conn, $query);
-    $rows = mysqli_num_rows($result);
-    if ($rows == 1) {
-        $_SESSION['username'] = $username;
-        // Redirect user to index.php 
-        header("Location: login.php");
-    } else {
-        echo "<div class='form'> 
-<h3>Username/password is incorrect.</h3>";
-    }
-}
+include "db_connect.php";
+// sessionStorage.username("usersname","$randomString");
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,46 +16,68 @@ if (isset($_POST['username'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
 
-<body>
-    <section class="vh-100" style="background-color: #508bfc;">
-        <div class="container py-5 h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                    <div class="card shadow-2-strong" style="border-radius: 1rem;">
-                        <div class="card-body p-5 text-center">
-                            <form action="empdata.php" method="post" id="loginform">
-                                <h2 class="mb-5">Sign in</h2>
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control form-control-lg" name="username" id="username" placeholder="User Name" required />
-                                    <label for="username">User Name</label>
-                                </div>
+<body style="background-color: #508bfc;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
+                        <form action="" method="post" id="loginform">
+                            <h2 class="mb-5">Sign in</h2>
+                            <?php
+                            if (isset($_POST['login'])) {
+                                $username = $_POST["username"];
+                                $password = $_POST["password"];
+                                $stmt = $conn->prepare("SELECT * FROM users WHERE username=? AND user_password=?");
+                                $stmt->bind_param("ss", $username, $password);
+                                $stmt->execute();
+                                $result = $stmt->get_result();
+                                if ($result->num_rows > 0) {
+                                    $row = $result->fetch_assoc();
+                                    $randomString = substr(str_shuffle("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"), 0, 20);
+                                    $_SESSION['randomString'] = $randomString;
+                                    $_SESSION['fullname'] = $row['fullname'];
+                                    header("Location: empdata.php");
+                                    exit();
+                                } else {
+                            ?>
+                                    <div class="alert alert-danger text-center">
+                                        <h4 class="mb-0">Sorry, Invalid Username and Password</h4>
+                                        <p class="mb-0">Please Enter Correct Credentials</p>
+                                    </div>
+                            <?php
+                                }
+                                $stmt->close();
+                            }
+                            ?>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control form-control-lg" name="username" id="username" placeholder="User Name" required />
+                                <label for="username">User Name</label>
+                            </div>
 
-                                <div class="form-floating">
-                                    <input type="password" class="form-control form-control-lg" name="password" id="password" placeholder="Password" required />
-                                    <label for="password">Password</label>
-                                </div>
+                            <div class="form-floating">
+                                <input type="password" class="form-control form-control-lg" name="password" id="password" placeholder="Password" required />
+                                <label for="password">Password</label>
+                            </div>
 
-                                <button class="btn btn-primary btn-lg btn-block px-5 my-5" type="submit" value="login">Login</button>
+                            <button class="btn btn-primary btn-lg btn-block px-5 my-5" type="submit" value="login" name="login">Login</button>
 
-                                <div>
-                                    <p class="mb-0">Don't have an account? <a href="signup.php" class="text-primary fw-bold">Sign Up</a>
-                                    </p>
-                                </div>
-                            </form>
-                        </div>
+                            <div>
+                                <p class="mb-0">Don't have an account? <a href="signup.php" class="text-primary fw-bold">Sign Up</a>
+                                </p>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Bootstrap Pooper JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Custom scripts -->
-    <!-- <script type="text/javascript" src="loginscript.js"></script> -->
 </body>
 
 </html>

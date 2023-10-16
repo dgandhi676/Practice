@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 29, 2023 at 10:25 AM
+-- Generation Time: Oct 16, 2023 at 12:43 PM
 -- Server version: 5.7.41
 -- PHP Version: 8.0.26
 
@@ -32,36 +32,30 @@ CREATE TABLE IF NOT EXISTS `employee` (
   `ot_id` int(11) NOT NULL AUTO_INCREMENT,
   `ot_firstname` varchar(20) NOT NULL,
   `ot_lastname` varchar(20) NOT NULL,
+  `ot_phoneno` varchar(255) NOT NULL,
+  `ot_dob` date NOT NULL,
   `ot_image` varchar(5000) NOT NULL,
   `ot_email` varchar(150) NOT NULL,
   `ot_gender` varchar(20) NOT NULL,
+  `ot_country` varchar(100) NOT NULL,
+  `ot_state` varchar(100) NOT NULL,
+  `ot_city` varchar(100) NOT NULL,
   `ot_completed_5_years` varchar(20) NOT NULL,
-  `ot_profile` varchar(500) NOT NULL,
+  `ot_profile` varchar(50000) NOT NULL,
   PRIMARY KEY (`ot_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `employee`
 --
 
-INSERT INTO `employee` (`ot_id`, `ot_firstname`, `ot_lastname`, `ot_image`, `ot_email`, `ot_gender`, `ot_completed_5_years`, `ot_profile`) VALUES
-(9, 'dev', 'parekh', 'emp-image/14_1695645463.png', 'devgandhi1113@gmail.com', 'Female', 'No', 'hgggg12334'),
-(10, 'manan56456456', 'Gandhi', 'emp-image/2_1695645449.png', 'mananparekh812@gmail.com', 'Female', 'Yes', ' 1234'),
-(11, 'vint', 'de', 'emp-image/17_1693825766.png', 'vbndn@gfgfg', 'Male', 'Yes', 'grgrweg'),
-(12, 'vint', 'Gandhi', 'emp-image/15_1693825090.png', 'mananparekh812@gmail.com', 'Female', 'No', 'Hi This Profile Descriptor.\r\n'),
-(13, 'dev', 'de', 'emp-image/18_1693825779.png', 'vbndn@gfgfg', 'Male', 'No', 'vfver'),
-(14, 'Ishita', 'Gandhi', 'emp-image/17_1693829522.png', 'devgansgi@gmail.com', 'Male', 'No', 'this is testing application'),
-(19, 'Ishita', 'Gandhi', 'emp-image/3_1695618287.png', 'vbndn@gfgfg', 'Female', 'No', 'vdavsdvsdv'),
-(24, 'Subhnam', 'Gill', 'emp-image/3_1695642048.png', 'sgill123@gmail.com', 'Male', 'Yes', 'Player icc'),
-(21, 'Hardik', 'Pandya', 'emp-image/6_1695641844.png', 'hpandya@gmail.com', 'Male', 'Yes', 'Gujarat team captain'),
-(22, 'Ishan', 'Kishan', 'emp-image/13_1695641897.png', 'ikishan@yahoo.com', 'Male', 'Yes', 'Cricket Player'),
-(25, 'Dhoni', 'Mahendra', 'emp-image/16_1695642445.png', 'msdhoni@gmail.com', 'Male', 'Yes', 'Retired Cricketer'),
-(26, 'Ishita', 'Gandhi', 'emp-image/3_1695642577.png', 'walan7072@gmail.com', 'Male', 'No', 'dvd'),
-(27, 'Ishita', 'Gandhi', 'emp-image/4_1695642734.png', 'rsharma@gmail.com', 'Female', 'No', 'nyujnm7u'),
-(28, 'Ishita', 'Gandhi', 'emp-image/14_1695642869.png', 'rsharma@gmail.com', 'Female', 'No', 'cdecvwerv'),
-(29, 'eddy', 'Philis', 'emp-image/14_1695645533.png', 'dgfdsgsdg@fgnn.com', 'Male', 'Yes', 'bfbhdfhndfhd'),
-(30, 'Hritik', 'Roshan', 'emp-image/5_1695646001.png', 'drosha@gmail.com', 'Male', 'Yes', '+25 Years Acting Experience'),
-(31, 'Rohit', 'ji123', 'emp-image/4_1695703878.png', 'gsdgdg@ggg.com', 'Male', 'No', 'FFggfd1234576');
+INSERT INTO `employee` (`ot_id`, `ot_firstname`, `ot_lastname`, `ot_phoneno`, `ot_dob`, `ot_image`, `ot_email`, `ot_gender`, `ot_country`, `ot_state`, `ot_city`, `ot_completed_5_years`, `ot_profile`) VALUES
+(17, 'Dev ', 'Gandhi', '9737488800', '2003-01-11', 'emp-image/mi1_1697097629.png', 'devgandhi1113@gmail.com', 'Male', 'IN', 'GJ', 'Surat', 'Yes', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'),
+(15, 'ngrngrnen', 'enwernen', '3562362356', '2023-10-11', 'emp-image/mi2_1697094576.png', 'mmm@sss.com', 'Male', 'AT', '4', 'Altlichtenberg', 'Yes', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'),
+(19, 'Sagar', 'Prajapati', '9898598985', '2023-09-26', 'emp-image/mi4_1697192204.png', 'sprajapati@plusonex.com', 'Female', 'AO', 'MOX', 'Lumeje', 'No', 'Hello@'),
+(20, 'Semil', 'More', '5263894563', '2002-02-02', 'emp-image/mi3_1697434400.png', 'smore@plusonex.com', 'Male', 'AG', '06', 'Falmouth', 'No', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'),
+(16, ' bvfd gf grbgrhwb', 'ghwtghweghweghwe', '4353451425', '2023-10-03', 'emp-image/mi2_1697093807.png', 'devgandhi1113@gmail.com', 'Male', 'AM', 'VD', 'Vernashen', 'Yes', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'),
+(18, 'Ishita', 'Gandhi', '9737588800', '2023-10-12', 'emp-image/mi6_1697093309.png', 'fdegdgasdg@vgdgsdfgasdgrghefh.vcom', 'Male', 'IN', 'LD', 'Kavaratti', 'Yes', 'orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

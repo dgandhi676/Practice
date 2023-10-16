@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'db_connect.php';
 if (isset($_POST['submit'])) {
     // print_r($_POST);
@@ -44,7 +45,7 @@ if (isset($_POST['submit'])) {
     if (mysqli_query($conn, $sqli)) {
         echo "ADDED EMPLOYEE RECORD";
         header('Location: http://localhost/Dev/office_team/empdata.php');
-        die();
+        // die();
     } else {
         echo "error: " . mysqli_error($conn);
     }

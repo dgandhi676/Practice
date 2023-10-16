@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'db_connect.php';
 $id = $_GET['id'];
 // print_r($id);
