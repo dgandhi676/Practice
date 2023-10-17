@@ -10,6 +10,7 @@ if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
+
     $sqli = "INSERT INTO users (fullname, username, user_email, user_password) values ('$fullname', '$username', '$email', '$password')";
 
     if (mysqli_query($conn, $sqli)) {
@@ -29,7 +30,6 @@ if (isset($_POST['username'])) {
     } else {
         echo 'available';
     }
-
     exit;
 }
 ?>
@@ -49,7 +49,7 @@ if (isset($_POST['username'])) {
 </head>
 
 <body style="background-color: #508bfc;">
-    <div class="container py-5 h-100">
+    <div class="container py-5">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                 <div class="card shadow-2-strong" style="border-radius: 1rem;">
@@ -77,7 +77,7 @@ if (isset($_POST['username'])) {
                                 <label for="password">Password</label>
                             </div>
 
-                            <button class="btn btn-primary btn-lg btn-block px-5 my-5" type="submit" value="signup" name="submit">Sign Up</button>
+                            <button class="btn btn-primary btn-lg btn-block px-5 my-5" type="submit" value="submit" name="submit">Sign Up</button>
 
                             <div>
                                 <p class="mb-0">Already Account Created? <a href="login.php" class="text-primary fw-bold">Sign In</a>
@@ -118,10 +118,7 @@ if (isset($_POST['username'])) {
             }
 
             if (!emailRegex.test(email)) {
-                showTooltip(
-                    "email",
-                    "Please enter a valid email address (name@example.com)."
-                );
+                showTooltip("email", "Please enter a valid email address (name@example.com).");
                 return false;
             }
 
@@ -156,39 +153,38 @@ if (isset($_POST['username'])) {
         }
 
         document.getElementById("loginform").addEventListener("submit", function(event) {
-                if (!validateForm()) {
-                    event.preventDefault();
-                }
-            });
+            if (!validateForm()) {
+                event.preventDefault();
+                return false;
+            }
+        });
 
-        document
-            .getElementById("fullname")
-            .addEventListener("keypress", function(event) {
-                const regex = /^[A-Za-z\s]+$/;
-                const key = String.fromCharCode(event.charCode);
-                if (!regex.test(key)) {
-                    event.preventDefault();
-                }
-            });
 
-            document.getElementById("username").addEventListener("input", function(event) {
-                const username = event.target.value;
-                if (username === "") {
-                    showTooltip("username", "Username cannot be empty.");
-                    return;
+        document.getElementById("fullname").addEventListener("keypress", function(event) {
+            const regex = /^[A-Za-z\s]+$/;
+            const key = String.fromCharCode(event.charCode);
+            if (!regex.test(key)) {
+                event.preventDefault();
+            }
+        });
+
+        document.getElementById("username").addEventListener("input", function(event) {
+            const username = event.target.value;
+            if (username === "") {
+                showTooltip("username", "Username cannot be empty.");
+                return false;
+            }
+            
+
+            $.post("signup.php", {username: username}, function(data) {
+                if (data === "exists") {
+                    showTooltip("username", "Username already exists.");
+                    return false;
+                } else {
+                    showTooltip("Username", "");
                 }
-                
-                $.post("signup.php", { username: username }, function(data) {
-                    if (data === "exists") {
-                        var aa = showTooltip("username", "Username already exists.");
-                        if (aa) {
-                            event.preventDefault();
-                        }
-                    } else {
-                        showTooltip("username", "");
-                    }
-                });
             });
+        });
     </script>
 </body>
 

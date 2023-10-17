@@ -1,6 +1,19 @@
 <?php
 session_start();
 include 'db_connect.php';
+if (isset($_SESSION["user"])) {
+    if (time() - $_SESSION["login_time_stamp"] > 600) {
+        session_unset();
+        session_destroy();
+        header("Location:login.php");
+    }
+} else {
+    header("Location:login.php");
+}
+if (!isset($_SESSION['randomString'])) {
+    header("Location: login.php");
+    exit();
+}
 if (isset($_POST['submit'])) {
     // print_r($_POST);
     // die();
@@ -60,13 +73,13 @@ if (isset($_POST['submit'])) {
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-body-secondary">
     <div class="container d-flex justify-content-center align-items-center " style="min-height: 100vh;">
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header">
                     <h2 class="text-start">Add Team Member
-                        <a href="empdata.php" class="btn btn-primary float-end ">Employee List</a>
+                        <a href="empdata.php" class="btn btn-outline-primary float-end ">Employee List</a>
                     </h2>
                 </div>
                 <div class="card-body">
@@ -164,7 +177,7 @@ if (isset($_POST['submit'])) {
                         </div>
                         <br>
                         <div class="col-12">
-                            <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit Details</button>
+                            <button type="submit" name="submit" value="submit" class="btn btn-outline-primary">Submit Details</button>
                         </div>
                     </form>
                 </div>

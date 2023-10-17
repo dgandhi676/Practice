@@ -2,6 +2,15 @@
 session_start();
 include 'db_connect.php';
 // echo $_SESSION['randomString'];
+if (isset($_SESSION["user"])) {
+    if (time() - $_SESSION["login_time_stamp"] > 600) {
+        session_unset();
+        session_destroy();
+        header("Location:login.php");
+    }
+} else {
+    header("Location:login.php");
+}
 if (!isset($_SESSION['randomString'])) {
     header("Location: login.php");
     exit();
@@ -48,11 +57,14 @@ $total_pages = ceil($total_records / $records_per_page);
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
 
-<body style="text-align:center;">
+<body style="text-align:center;" class="bg-body-secondary">
     <h4 class="float-start py-4 px-3 text-white"> Welcome, <?php echo $_SESSION['fullname']; ?> </h4>
     <h1 class="bg-primary text-light py-3 px-5">
-    Employee Records <button type="button" class="btn btn-danger mt-2 float-end mx-2" onclick="window.location.href='logout.php'">Logout</button></h1>
-    
+        Employee Records 
+        <button type="button" class="btn btn-outline-danger btn float-end mx-2 mt-1 col-1" onclick="window.location.href='logout.php'">
+        Logout
+    </button>
+    </h1>
     <div class="container-fluid">
         <div class="row my-3">
             <div class="col-10">
@@ -60,18 +72,18 @@ $total_pages = ceil($total_records / $records_per_page);
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search...." name="search">
                     </div>
-                    <button type="submit" class="btn btn-primary mt-2">Search</button>
-                    <button type="button" class="btn btn-primary mt-2" onclick="window.location.href='empdata.php'">Reset</button>
+                    <button type="submit" class="btn btn-outline-primary mt-2 col-1">Search</button>
+                    <button type="button" class="btn btn-outline-danger mt-2 mx-3 col-1" onclick="window.location.href='empdata.php'">Reset</button>
                 </form>
             </div>
             <div class="col-2">
-                <a href="index.php" class="btn btn-primary">Add Employee</a>
+                <a href="index.php" class="btn btn-outline-primary">Add Employee</a>
             </div>
         </div>
 
-        <div class="table-responsive text-center">
+        <div class="table-responsive text-center bg-secondary-subtle">
             <table class="table table-bordered table-hover rounded-4">
-                <thead class="thead-dark">
+                <thead>
                     <tr>
                         <th>ID</th>
                         <th>First Name</th>
@@ -117,8 +129,8 @@ $total_pages = ceil($total_records / $records_per_page);
                         <td>" . $result['ot_city'] . "</td>
                         <td>" . $result['ot_completed_5_years'] . "</td>
         
-                        <td><a href='update.php?id=" . $result['ot_id'] . "' class='btn btn-primary btn-sm'>Update</a></td>
-                        <td><a href='delete.php?id=" . $result['ot_id'] . "' class='btn btn-danger btn-sm' onclick='return confirm(\"Are you sure you want to delete this record?\");'>DELETE</a></td>
+                        <td><a href='update.php?id=" . $result['ot_id'] . "' class='btn btn-outline-warning btn-sm'>Update</a></td>
+                        <td><a href='delete.php?id=" . $result['ot_id'] . "' class='btn btn-outline-danger btn-sm' onclick='return confirm(\"Are you sure you want to delete this record?\");'>DELETE</a></td>
                         </tr>";
                     }
                 }

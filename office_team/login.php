@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "db_connect.php";
-// sessionStorage.username("usersname","$randomString");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,6 +37,8 @@ include "db_connect.php";
                                     $randomString = substr(str_shuffle("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"), 0, 20);
                                     $_SESSION['randomString'] = $randomString;
                                     $_SESSION['fullname'] = $row['fullname'];
+                                    $_SESSION["user"] = $username;
+                                    $_SESSION["login_time_stamp"] = time(); 
                                     header("Location: empdata.php");
                                     exit();
                                 } else {

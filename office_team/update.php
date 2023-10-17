@@ -1,6 +1,19 @@
 <?php
 session_start();
 include 'db_connect.php';
+if (isset($_SESSION["user"])) {
+    if (time() - $_SESSION["login_time_stamp"] > 600) {
+        session_unset();
+        session_destroy();
+        header("Location:login.php");
+    }
+} else {
+    header("Location:login.php");
+}
+if (!isset($_SESSION['randomString'])) {
+    header("Location: login.php");
+    exit();
+}
 $id = $_GET['id'];
 // print_r($id);
 $sql = "SELECT * FROM employee WHERE ot_id = " . $id;
@@ -69,13 +82,13 @@ if (isset($_POST['update'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="bg-body-secondary">
     <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header">
                     <h2 class="text-start">Update Member
-                        <a href="empdata.php" class="btn btn-primary float-end">Employee List</a>
+                        <a href="empdata.php" class="btn btn-outline-primary float-end">Employee List</a>
                     </h2>
                 </div>
                 <div class="card-body">
@@ -175,7 +188,7 @@ if (isset($_POST['update'])) {
                             </div>
                         </div>
                         <br>
-                        <button type="submit" name="update" value="update" class="btn btn-primary"> Update Details </button>
+                        <button type="submit" name="update" value="update" class="btn btn-outline-primary"> Update Details </button>
                     </form>
                 </div>
             </div>
