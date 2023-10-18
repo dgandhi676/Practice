@@ -17,14 +17,28 @@ include "db_connect.php";
 </head>
 
 <body style="background-color: #508bfc;">
-    <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
+    <div class="container py-5 ">
+        <div class="row d-flex justify-content-center align-items-center ">
             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                 <div class="card shadow-2-strong" style="border-radius: 1rem;">
                     <div class="card-body p-5 text-center">
                         <form action="" method="post" id="loginform">
                             <h2 class="mb-5">Sign in</h2>
                             <?php
+                            $maxLoginAttempts = 3;
+                            $lockoutTime = 30;
+                            if (!isset($_SESSION['login_attempts'])) {
+                                $_SESSION['login_attempts'] = 0;
+                            }
+                            if ($_SESSION['login_attempts'] >= $maxLoginAttempts && time() - $_SESSION["login_time_stamp"] < $lockoutTime) {
+                                echo '<div class="alert alert-danger text-center">
+                                    <h4 class="mb-0">Too Many Attempts!!!</h4>
+                                    <p class="mb-0">Please Try Again Later.</p>
+                                </div>';
+                                exit(); 
+                            } elseif ($_SESSION['login_attempts'] >= $maxLoginAttempts) {
+                                unset($_SESSION['login_attempts']);
+                            }
                             if (isset($_POST['login'])) {
                                 $username = $_POST["username"];
                                 $password = $_POST["password"];
@@ -38,16 +52,16 @@ include "db_connect.php";
                                     $_SESSION['randomString'] = $randomString;
                                     $_SESSION['fullname'] = $row['fullname'];
                                     $_SESSION["user"] = $username;
-                                    $_SESSION["login_time_stamp"] = time(); 
+                                    unset($_SESSION['login_attempts']);
+                                    $_SESSION["login_time_stamp"] = time();
                                     header("Location: empdata.php");
                                     exit();
                                 } else {
-                            ?>
-                                    <div class="alert alert-danger text-center">
+                                    $_SESSION['login_attempts']++;
+                                    echo '<div class="alert alert-danger text-center">
                                         <h4 class="mb-0">Sorry, Invalid Username and Password</h4>
                                         <p class="mb-0">Please Enter Correct Credentials</p>
-                                    </div>
-                            <?php
+                                        </div>';
                                 }
                                 $stmt->close();
                             }

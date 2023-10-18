@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 16, 2023 at 12:42 PM
+-- Generation Time: Oct 18, 2023 at 12:58 PM
 -- Server version: 5.7.41
 -- PHP Version: 8.0.26
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `user_email` varchar(255) NOT NULL,
   `user_password` varchar(255) NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
@@ -49,8 +49,10 @@ INSERT INTO `users` (`user_id`, `fullname`, `username`, `user_email`, `user_pass
 (9, 'Semil More', 'jkava', 'walan7072@gmail.com', 'Dev@3445'),
 (10, 'Tejas Mehta', 'tmehta', 'tmehta@yahoo.com', 'ADmin@123'),
 (11, 'Ishita Gandhi', 'igandhi', 'ishitagandhi812@gmail.com', 'Ishu@1409'),
-(12, 'Semil More', 'smore123', 'devgandhi1113@gmail.com', '1234@admtn'),
-(13, 'Rohit Sharma', 'rsharma', 'rsharma@gmail.com', 'Rshrna@123');
+(45, 'Semil More', 'devgandhi1234', 'rsharma@gmail.com', 'admin@123'),
+(44, 'Semil More', 'devgandhi123', 'walan7072@gmail.com', 'admin@123'),
+(43, 'Semil More', 'smore123', 'rsharma@gmail.com', 'admin@123'),
+(46, 'Mohit Sharma', 'mohit2033', 'mohitsharma@gmail.com', 'Admin@1234');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

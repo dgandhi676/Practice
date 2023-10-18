@@ -1,10 +1,11 @@
 <?php
 session_start();
 include "db_connect.php";
+    
 if (isset($_POST['submit'])) {
-    echo "<pre>";
-    print_r($_POST);
-    die();
+    // echo "<pre>";
+    // print_r($_POST);
+    // die();
     $fullname = $_POST['fullname'];
     $email = $_POST['email'];
     $username = $_POST['username'];
@@ -20,21 +21,7 @@ if (isset($_POST['submit'])) {
         echo "error: " . mysqli_error($conn);
     }
 }
-if (isset($_POST['username'])) {
-    $username = mysqli_real_escape_string($conn, $_POST['username']);
-    $checkUsernameQuery = "SELECT * FROM users WHERE username = '$username'";
-    $result = mysqli_query($conn, $checkUsernameQuery);
-
-    if (mysqli_num_rows($result) > 0) {
-        echo 'exists';
-    } else {
-        echo 'available';
-    }
-    exit;
-}
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -77,7 +64,7 @@ if (isset($_POST['username'])) {
                                 <label for="password">Password</label>
                             </div>
 
-                            <button class="btn btn-primary btn-lg btn-block px-5 my-5" type="submit" value="submit" name="submit">Sign Up</button>
+                            <button class="btn btn-primary btn-lg btn-block px-5 my-5" type="submit" value="submit" name="submit" id="submit">Sign Up</button>
 
                             <div>
                                 <p class="mb-0">Already Account Created? <a href="login.php" class="text-primary fw-bold">Sign In</a>
@@ -95,6 +82,8 @@ if (isset($_POST['username'])) {
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- AJAX JQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxy/1.6.1/scripts/jquery.ajaxy.min.js"></script>
     <!-- Custom scripts -->
     <script type="text/javascript">
         const nameRegex = /^[A-Za-z ]+$/;
@@ -128,10 +117,7 @@ if (isset($_POST['username'])) {
             }
 
             if (!passRegex.test(newPassword)) {
-                showTooltip(
-                    "password",
-                    "Password should contain at least one number and one special character."
-                );
+                showTooltip("password", "Password should contain at least one number and one special character.");
                 return false;
             }
 
@@ -174,14 +160,18 @@ if (isset($_POST['username'])) {
                 showTooltip("username", "Username cannot be empty.");
                 return false;
             }
-            
-
-            $.post("signup.php", {username: username}, function(data) {
-                if (data === "exists") {
-                    showTooltip("username", "Username already exists.");
-                    return false;
-                } else {
-                    showTooltip("Username", "");
+            $.ajax({
+                url: 'usubmit.php',
+                method: "POST",
+                data: {username: username},
+                success: function(data) {
+                    if (data === 'exists') {
+                        showTooltip("username", "Username already taken.");
+                        document.getElementById("submit").disabled = true;
+                    } else if (data === 'available') {
+                        showTooltip("username", "Username Available.");
+                        document.getElementById("submit").disabled = false;
+                    }
                 }
             });
         });

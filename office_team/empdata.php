@@ -2,6 +2,9 @@
 session_start();
 include 'db_connect.php';
 // echo $_SESSION['randomString'];
+
+
+// Session Timeout Query
 if (isset($_SESSION["user"])) {
     if (time() - $_SESSION["login_time_stamp"] > 600) {
         session_unset();
@@ -11,10 +14,19 @@ if (isset($_SESSION["user"])) {
 } else {
     header("Location:login.php");
 }
+
+
+
+
+// Random String Query
 if (!isset($_SESSION['randomString'])) {
     header("Location: login.php");
     exit();
 }
+
+
+
+// Pagination Query
 $records_per_page = 5;
 if (isset($_GET['page']) && is_numeric($_GET['page'])) {
     $current_page = intval($_GET['page']);
@@ -22,6 +34,9 @@ if (isset($_GET['page']) && is_numeric($_GET['page'])) {
     $current_page = 1;
 }
 $offset = ($current_page - 1) * $records_per_page;
+
+
+// Search Query
 if (isset($_GET['search'])) {
     $searchTerm = mysqli_real_escape_string($conn, $_GET['search']);
     $sql = "SELECT * FROM employee WHERE 
@@ -58,7 +73,7 @@ $total_pages = ceil($total_records / $records_per_page);
 </head>
 
 <body style="text-align:center;" class="bg-body-secondary">
-    <h4 class="float-start py-4 px-3 text-white"> Welcome, <?php echo $_SESSION['fullname']; ?> </h4>
+    <h4 class="float-start py-4 px-3 text-white"> Welcome <?php echo $_SESSION['fullname']; ?>, </h4>
     <h1 class="bg-primary text-light py-3 px-5">
         Employee Records 
         <button type="button" class="btn btn-outline-danger btn float-end mx-2 mt-1 col-1" onclick="window.location.href='logout.php'">
@@ -72,7 +87,7 @@ $total_pages = ceil($total_records / $records_per_page);
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search...." name="search">
                     </div>
-                    <button type="submit" class="btn btn-outline-primary mt-2 col-1">Search</button>
+                    <button type="submit" class="btn btn-outline-primary mt-2 col-1 text-center">Search</button>
                     <button type="button" class="btn btn-outline-danger mt-2 mx-3 col-1" onclick="window.location.href='empdata.php'">Reset</button>
                 </form>
             </div>
