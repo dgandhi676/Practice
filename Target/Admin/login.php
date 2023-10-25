@@ -53,7 +53,7 @@ include "db_connect.php";
                                     $_SESSION['fullname'] = $row['fullname'];
                                     $_SESSION["user"] = $username;
                                     unset($_SESSION['login_attempts']);
-                                    header("Location: empdata.php");
+                                    header("Location: home.php");
                                     exit();
                                 } else {
                                     echo '<div class="alert alert-danger text-center">
