@@ -89,7 +89,7 @@ if (isset($_POST['update'])) {
             <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; height: 100vh;">
                 <ul class="nav nav-pills flex-column mb-auto">
                     <li class="nav-item">
-                        <a href="#" class="nav-link" aria-current="page">
+                        <a href="home.php" class="nav-link" aria-current="page">
                             <i class="bi bi-house-door"></i>
                             HOME
                         </a>

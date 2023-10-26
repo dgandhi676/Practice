@@ -94,7 +94,7 @@ if (isset($_POST['submit'])) {
             <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; height: 100vh;">
                 <ul class="nav nav-pills flex-column mb-auto">
                     <li class="nav-item">
-                        <a href="#" class="nav-link" aria-current="page">
+                        <a href="home.php" class="nav-link" aria-current="page">
                             <i class="bi bi-house-door"></i>
                             HOME
                         </a>
@@ -183,16 +183,17 @@ if (isset($_POST['submit'])) {
                                 <label for="prodis" class="form-label">Discount Price: </label>
                                 <input type="number" name="prodis" id="prodis" class="form-control" placeholder="Enter your Product Discount Price">
                             </div>
-                            <div class="col-mb-6">
+                            <br>
+                            <div class="col-mb-3">
                                 <label class="form-label" name="dicena" value="dicena" id="dicena">Discount Enabled:</label>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="dicena[]" value="Yes" id="Yes">
+                                    <input class="form-check-input" type="checkbox" name="dicena[]" value="Yes" id="Yes" required>
                                     <label class="form-check-label" for="Yes">
                                         Yes
                                     </label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="dicena[]" value="No" id="No">
+                                    <input class="form-check-input" type="checkbox" name="dicena[]" value="No" id="No" required>
                                     <label class="form-check-label" for="No">
                                         No
                                     </label>
@@ -222,7 +223,7 @@ if (isset($_POST['submit'])) {
                 const activein = document.querySelector('input[name="activein"]:checked');
                 const prosell = document.getElementById("prosell").value;
                 const prodis = document.getElementById("prodis").value;
-                const dicena = document.querySelectorAll('input[name="dicena[]"]:checked');
+                
                 if (proname === "") {
                     showTooltip(
                         "proname",
@@ -269,7 +270,8 @@ if (isset($_POST['submit'])) {
                     showTooltip("prodis", "Discount Price is required.");
                     return false;
                 }
-                if (completionOptions.length === 0) {
+                const dicena = document.querySelectorAll('input[name="dicena[]"]:checked');
+                if (dicena.length === 0) {
                     showTooltip("dicena", "Select at least one option.");
                     return false;
                 }
