@@ -180,7 +180,7 @@ if (isset($_POST['update'])) {
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="activein" id="Yes" value="Yes" <?php if ($fet['pro_inactive'] == "Yes") {
                                                                                                                             echo "checked";
-                                                                                                                        } ?>>
+                                                                                                                        } ?> selected>
                                     <label for="form-check-label" for="Yes">
                                         Yes
                                     </label>

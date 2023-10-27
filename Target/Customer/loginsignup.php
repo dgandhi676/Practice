@@ -2,16 +2,16 @@
 session_start();
 include 'db_connect.php';
 if (isset($_POST['signup'])) {
-    // echo "<pre>";
-    // print_r($_POST);
-    // die();
+    echo "<pre>";
+    print_r($_POST);
+    die();
     $signupname = $_POST['signupname'];
-    $address =  mysqli_real_escape_string($conn, $_POST['address']);
-    $cusemail = $_POST['cusemail'];
+    $signupaddress =  mysqli_real_escape_string($conn, $_POST['signupaddress']);
+    $signupemail = $_POST['signupemail'];
     $signuppass = $_POST['signuppass'];
 
 
-    $sqli = "INSERT INTO customer_master (cus_name, cus_address, cus_email, cus_password) values ('$signupname', '$address', '$cusemail', '$signuppass')";
+    $sqli = "INSERT INTO customer_master (cus_name, cus_address, cus_email, cus_password) values ('$signupname', '$signupaddress', '$signupemail', '$signuppass')";
 
     if (mysqli_query($conn, $sqli)) {
         header('Location: loginsignup.php');
@@ -31,12 +31,20 @@ if (isset($_POST['signup'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
+    <style>
+        body {
+            background-image: url('img/bgpic.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+        }
+    </style>
 </head>
 
 <body>
     <div class="container mt-5">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center align-items-center" style="height: 75vh;">
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
@@ -50,38 +58,60 @@ if (isset($_POST['signup'])) {
                         </ul>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
-                            <form action="" method="post" id="loginform">
+                                <form action="" method="post" id="loginform">
+                                    <?php
+                                    if (isset($_POST['login'])) {
+                                        $loginemail = $_POST["loginemail"];
+                                        $loginpass = $_POST["loginpass"];
+                                        $stmt = $conn->prepare("SELECT * FROM customer_master WHERE cus_email=? AND cus_password=?");
+                                        $stmt->bind_param("ss", $loginemail, $loginpass);
+                                        $stmt->execute();
+                                        $result = $stmt->get_result();
+                                        if ($result->num_rows > 0) {
+                                            $row = $result->fetch_assoc();
+                                            $randomString = substr(str_shuffle("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"), 0, 20);
+                                            $_SESSION['randomString'] = $randomString;
+                                            $_SESSION["email"] = $loginemail;
+                                            $stmt->close();
+                                            header("Location: home.php");
+                                            exit();
+                                        } else {
+                                            echo '<div class="alert alert-danger text-center">
+                                            <h4 class="mb-0">Sorry, Invalid Email and Password</h4>
+                                            <p class="mb-0">Please Enter Correct Credentials</p></div>';
+                                            $stmt->close();
+                                        }
+                                    }
+                                    ?>
                                     <div class="form-floating my-3">
-                                        <input type="text" class="form-control" id="loginUser" placeholder="Enter your username">
-                                        <label for="loginUser" class="form-label">Email:</label>
+                                        <input type="text" class="form-control" id="loginemail" name="loginemail" placeholder="Enter your Email">
+                                        <label for="loginemail" class="form-label">Email:</label>
                                     </div>
                                     <div class="form-floating my-3">
-                                        <input type="password" class="form-control" id="loginPass" placeholder="Enter your password">
+                                        <input type="password" class="form-control" id="loginpass" placeholder="Enter your Password">
                                         <label for="loginPass" class="form-label">Password</label>
                                     </div>
                                     <button type="submit" class="btn btn-outline-primary px-3">Sign In</button>
                                 </form>
                             </div>
                             <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="signup-tab">
-                            <form action="" method="post" id="signupform" onsubmit="return validateform()" class="needs-validation" novalidate>
+                                <form action="" method="post" id="signupform" onsubmit="return validateform()" class="needs-validation" novalidate>
                                     <div class="form-floating my-3">
                                         <input type="text" class="form-control" id="signupname" name="signupname" placeholder="Write your Name">
                                         <label for="signupname" class="form-label">Name:</label>
                                     </div>
                                     <div class="form-floating my-3">
-                                        <textarea class="form-control form-control-md" name="address" id="address" placeholder="Enter Address"></textarea>
-                                        <label for="address" class="form-label">Address:</label>
+                                        <textarea class="form-control form-control-md" name="signupaddress" id="signupaddress" placeholder="Enter Address"></textarea>
+                                        <label for="signupaddress" class="form-label">Address:</label>
                                     </div>
                                     <div class="form-floating my-3">
-                                        <input type="email" class="form-control" id="cusemail" name="cusemail" me placeholder="Enter your email address">
-                                        <label for="cusemail" class="form-label">Email Address:</label>
+                                        <input type="email" class="form-control" id="signupemail" name="signupemail" me placeholder="Enter your email address">
+                                        <label for="signupemail" class="form-label">Email Address:</label>
                                     </div>
                                     <div class="form-floating my-3">
                                         <input type="password" class="form-control" id="signuppass" name="signuppass" placeholder="Create your password">
                                         <label for="signuppass" class="form-label">Password:</label>
                                     </div>
-
-
                                     <button type="submit" class="btn btn-outline-primary" name="signup" id="signup">Sign Up</button>
                                 </form>
                             </div>
