@@ -25,6 +25,7 @@ $total_pages = ceil($total_records / $records_per_page);
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,8 +35,9 @@ $total_pages = ceil($total_records / $records_per_page);
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
+
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand" href="cushome.php">
                 <img src="img/logo.png" alt="Target logo" width="55px" height="65px">
@@ -54,48 +56,37 @@ $total_pages = ceil($total_records / $records_per_page);
                         <?php
                         $categorySql = "SELECT * FROM category_master";
                         $categoryResult = mysqli_query($conn, $categorySql);
-
                         if (mysqli_num_rows($categoryResult) > 0) {
                             while ($category = mysqli_fetch_assoc($categoryResult)) {
                                 $isActive = ($category['cat_active'] == 1) ? 'active' : '';
-                                echo '<li class="nav-item">
-                    <a class="nav-link ' . $isActive . '" href="#">
-                        ' . $category['cat_name'] . '
-                    </a>
-                  </li>';
+                                echo '<li class="nav-item"><a class="nav-link ' . $isActive . '" href="cushome.php?category_id=' . $category['cat_id'] . '">' . $category['cat_name'] . '</a></li>';
                             }
                         }
                         ?>
+
                     </ul>
 
                 </div>
             </nav>
-
 
             <main class="col-md-6 ms-sm-auto col-lg-10 px-md-4">
                 <div class="row">
                     <?php
                     if ($num1 = mysqli_num_rows($run1) > 0) {
                         while ($result = mysqli_fetch_assoc($run1)) {
+                            $isActive = ($result['cat_active'] == 'Active') ? true : false;
+                            if ($isActive) {
                     ?>
-                            <div class="col-md-4 mt-3">
-                                <div class="card d-flex align-items-center">
-                                    <img src="<?php echo $result['pro_image']; ?>" style="height: 200px; width: 200px;" class="card-img-top my-2" alt="Product Image">
-                                    <div class="card-body">
-                                        <h5 class="card-title text-center"><?php echo $result['pro_name']; ?></h5>
-                                        <p class="card-text text-center">
-                                            <?php
-                                            if ($result['pro_disco'] == "Yes") {
-                                                echo 'Rs.' . $result['pro_discprice'];
-                                            } else {
-                                                echo 'Rs.' . $result['pro_sellprice'];
-                                            }
-                                            ?>
-                                        </p>
+                                <div class="col-md-4 mt-3">
+                                    <div class="card d-flex align-items-center">
+                                        <img src="<?php echo $result['cat_image']; ?>" style="height: 200px; width: 200px;" class="card-img-top my-2" alt="Category Image">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center"><?php echo $result['cat_name']; ?></h5>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                     <?php
+                            }
                         }
                     } else {
                         echo "<div class='col-12'><p class='text-center text-danger'>No Products Found!</p></div>";
@@ -123,7 +114,6 @@ $total_pages = ceil($total_records / $records_per_page);
                     </ul>
                 </div>
             </main>
-
         </div>
     </div>
     <!-- Bootstrap JS -->

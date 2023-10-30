@@ -38,7 +38,7 @@ $total_pages = ceil($total_records / $records_per_page);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Category</title>
+    <title> Admin Category</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -50,7 +50,7 @@ $total_pages = ceil($total_records / $records_per_page);
         <div class="container-fluid">
             <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="offcanvasWithBothOptions"><i class="bi bi-stack" style="font-size: 25px;"></i></button>
             <div class="mx-auto">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="home.php">
                     <img src="img/logo.png" alt="Target logo" width="45px" height="65px">
                 </a>
             </div>
@@ -118,7 +118,6 @@ $total_pages = ceil($total_records / $records_per_page);
             <table class="table table-bordered table-hover table-secondary rounded-4">
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Category Name</th>
                         <th>Image</th>
                         <th>Active/Inactive</th>
@@ -141,11 +140,9 @@ $total_pages = ceil($total_records / $records_per_page);
                     while ($result = mysqli_fetch_assoc($run1)) {
                         echo "
                         <tr>
-                        <td>" . $result['cat_id'] . "</td>
                         <td>" . $result['cat_name'] . "</td>
                         <td><img src='" . $result['cat_image'] . "' height='75px' width='75px'></td>
                         <td>" . $result['cat_active'] . "</td>
-
 
                         <td><a href='categoryupdate.php?id=" . $result['cat_id'] . "' class='btn btn-outline-warning btn-sm'>Update</a></td>
                         <td><a href='catdelete.php?id=" . $result['cat_id'] . "' class='btn btn-outline-danger btn-sm' onclick='return confirm(\"Are you sure you want to delete this category?\");'>DELETE</a></td>

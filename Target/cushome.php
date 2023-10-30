@@ -82,7 +82,7 @@ $total_pages = ceil($total_records / $records_per_page);
                     ?>
                             <div class="col-md-4 mt-3">
                                 <div class="card d-flex align-items-center">
-                                    <img src="<?php echo $result['pro_image']; ?>" style="height: 200px; width: 200px;" class="card-img-top my-2" alt="Product Image">
+                                    <img src="<?php echo $result['pro_image']; ?>" style="height: 150px; width: 150px;" class="card-img-top my-2" alt="Product Image">
                                     <div class="card-body">
                                         <h5 class="card-title text-center"><?php echo $result['pro_name']; ?></h5>
                                         <p class="card-text text-center">

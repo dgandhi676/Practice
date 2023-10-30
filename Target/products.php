@@ -50,7 +50,7 @@ $total_pages = ceil($total_records / $records_per_page);
         <div class="container-fluid">
             <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="offcanvasWithBothOptions"><i class="bi bi-stack" style="font-size: 25px;"></i></button>
             <div class="mx-auto">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="home.php">
                     <img src="img/logo.png" alt="Target logo" width="45px" height="65px">
                 </a>
             </div>
@@ -147,7 +147,6 @@ $total_pages = ceil($total_records / $records_per_page);
                         <td>" . $result['pro_sellprice'] . "</td>
                         <td>" . $result['pro_discprice'] . "</td>
                         <td>" . $result['pro_disco'] . "</td>
-
 
                         <td><a href='productupdate.php?id=" . $result['pro_id'] . "' class='btn btn-outline-warning btn-sm'>Update</a></td>
                         <td><a href='prodelete.php?id=" . $result['pro_id'] . "' class='btn btn-outline-danger btn-sm' onclick='return confirm(\"Are you sure you want to delete this category?\");'>DELETE</a></td>

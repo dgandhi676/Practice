@@ -76,7 +76,7 @@ if (isset($_POST['submit'])) {
         <div class="container-fluid">
             <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="offcanvasWithBothOptions"><i class="bi bi-stack" style="font-size: 25px;"></i></button>
             <div class="mx-auto">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="home.php">
                     <img src="img/logo.png" alt="Target logo" width="45px" height="65px">
                 </a>
             </div>
