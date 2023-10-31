@@ -83,9 +83,9 @@ $total_pages = ceil($total_records / $records_per_page);
                             <div class="col-md-4 mt-3">
                                 <div class="card d-flex align-items-center">
                                     <img src="<?php echo $result['pro_image']; ?>" style="height: 150px; width: 150px;" class="card-img-top my-2" alt="Product Image">
-                                    <div class="card-body">
-                                        <h5 class="card-title text-center"><?php echo $result['pro_name']; ?></h5>
-                                        <p class="card-text text-center">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title"><?php echo $result['pro_name']; ?></h5>
+                                        <p class="card-text">
                                             <?php
                                             if ($result['pro_disco'] == "Yes") {
                                                 echo 'Rs.' . $result['pro_discprice'];
@@ -94,7 +94,9 @@ $total_pages = ceil($total_records / $records_per_page);
                                             }
                                             ?>
                                         </p>
+                                        <a href="cusproductpage.php?id=<?php echo $result['pro_id']; ?>" class="btn btn-outline-primary">View Details</a>
                                     </div>
+
                                 </div>
                             </div>
                     <?php

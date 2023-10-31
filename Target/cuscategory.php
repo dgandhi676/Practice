@@ -7,20 +7,16 @@ if (isset($_GET['page']) && is_numeric($_GET['page'])) {
     $current_page = 1;
 }
 $offset = ($current_page - 1) * $records_per_page;
-// Search Query
-if (isset($_GET['search'])) {
-    $searchTerm = mysqli_real_escape_string($conn, $_GET['search']);
-    $sql = "SELECT * FROM category_master WHERE 
-            cat_name LIKE '%$searchTerm%' OR 
-            cat_image LIKE '%$searchTerm%' OR 
-            cat_active LIKE '%$searchTerm%'
-            ORDER BY cat_id ASC LIMIT $offset, $records_per_page";
+if (isset($_GET['category']) && is_numeric($_GET['category'])) {
+    $categoryId = intval($_GET['category']);
+    $sql = "SELECT * FROM product_master WHERE pro_category_id = $categoryId ORDER BY pro_id ASC LIMIT $records_per_page";
 } else {
-
-    $sql = "SELECT * FROM category_master ORDER BY cat_id ASC LIMIT $offset, $records_per_page";
+    // Default query to fetch all products
+    $sql = "SELECT * FROM product_master ORDER BY pro_id ASC LIMIT $records_per_page";
 }
+
 $run1 = mysqli_query($conn, $sql);
-$total_records = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM category_master"));
+$total_records = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM product_master"));
 $total_pages = ceil($total_records / $records_per_page);
 ?>
 <!DOCTYPE html>
@@ -56,16 +52,16 @@ $total_pages = ceil($total_records / $records_per_page);
                         <?php
                         $categorySql = "SELECT * FROM category_master";
                         $categoryResult = mysqli_query($conn, $categorySql);
+
                         if (mysqli_num_rows($categoryResult) > 0) {
                             while ($category = mysqli_fetch_assoc($categoryResult)) {
                                 $isActive = ($category['cat_active'] == 1) ? 'active' : '';
-                                echo '<li class="nav-item"><a class="nav-link ' . $isActive . '" href="cushome.php?category_id=' . $category['cat_id'] . '">' . $category['cat_name'] . '</a></li>';
+                                echo '<li class="nav-item"><a class="nav-link ' . $isActive . '" href="#">' . $category['cat_name'] . '
+                                </a></li>';
                             }
                         }
                         ?>
-
                     </ul>
-
                 </div>
             </nav>
 
@@ -74,19 +70,25 @@ $total_pages = ceil($total_records / $records_per_page);
                     <?php
                     if ($num1 = mysqli_num_rows($run1) > 0) {
                         while ($result = mysqli_fetch_assoc($run1)) {
-                            $isActive = ($result['cat_active'] == 'Active') ? true : false;
-                            if ($isActive) {
                     ?>
-                                <div class="col-md-4 mt-3">
-                                    <div class="card d-flex align-items-center">
-                                        <img src="<?php echo $result['cat_image']; ?>" style="height: 200px; width: 200px;" class="card-img-top my-2" alt="Category Image">
-                                        <div class="card-body">
-                                            <h5 class="card-title text-center"><?php echo $result['cat_name']; ?></h5>
-                                        </div>
+                            <div class="col-md-4 mt-3">
+                                <div class="card d-flex align-items-center">
+                                    <img src="<?php echo $result['pro_image']; ?>" style="height: 150px; width: 150px;" class="card-img-top my-2" alt="Product Image">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center"><?php echo $result['pro_name']; ?></h5>
+                                        <p class="card-text text-center">
+                                            <?php
+                                            if ($result['pro_disco'] == "Yes") {
+                                                echo 'Rs.' . $result['pro_discprice'];
+                                            } else {
+                                                echo 'Rs.' . $result['pro_sellprice'];
+                                            }
+                                            ?>
+                                        </p>
                                     </div>
                                 </div>
+                            </div>
                     <?php
-                            }
                         }
                     } else {
                         echo "<div class='col-12'><p class='text-center text-danger'>No Products Found!</p></div>";
@@ -114,6 +116,7 @@ $total_pages = ceil($total_records / $records_per_page);
                     </ul>
                 </div>
             </main>
+
         </div>
     </div>
     <!-- Bootstrap JS -->
@@ -123,4 +126,5 @@ $total_pages = ceil($total_records / $records_per_page);
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </body>
+
 </html>
