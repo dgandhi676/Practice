@@ -108,7 +108,7 @@ if (isset($_POST['submit'])) {
     </div>
 
 
-    <div class="container d-flex justify-content-center align-items-center mt-5">
+    <div class="container d-flex fle justify-content-center align-items-center mt-5">
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header">

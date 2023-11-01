@@ -178,17 +178,13 @@ if (isset($_POST['update'])) {
                             <div class="col-md-6">
                                 <label for="activein" class="form-label" value="activein" id="activein">Active: </label>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="activein" id="Yes" value="Yes" <?php if ($fet['pro_inactive'] == "Yes") {
-                                                                                                                            echo "checked";
-                                                                                                                        } ?> selected>
+                                    <input class="form-check-input" type="radio" name="activein" id="Yes" value="Yes" <?php if ($fet['pro_inactive'] == "Yes") {echo "checked";} ?> selected>
                                     <label for="form-check-label" for="Yes">
                                         Yes
                                     </label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="activein" id="No" value="No" <?php if ($fet['pro_inactive'] == "No") {
-                                                                                                                        echo "checked";
-                                                                                                                    } ?>>
+                                    <input class="form-check-input" type="radio" name="activein" id="No" value="No" <?php if ($fet['pro_inactive'] == "No") {echo "checked";} ?>>
                                     <label for="form-check-label" for="No">
                                         No
                                     </label>
@@ -208,17 +204,13 @@ if (isset($_POST['update'])) {
                             <div class="col-mb-3">
                                 <label class="form-label" name="dicena" value="dicena" id="dicena">Discount Enabled:</label>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="dicena[]" id="Yes" value="Yes" <?php if (in_array("Yes", $data1)) {
-                                                                                                                                echo "checked";
-                                                                                                                            } ?>>
+                                    <input class="form-check-input" type="checkbox" name="dicena[]" id="Yes" value="Yes" <?php if (in_array("Yes", $data1)) {echo "checked";} ?>>
                                     <label class="form-check-label" for="Yes">
                                         Yes
                                     </label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="dicena[]" id="No" value="No" <?php if (in_array("No", $data1)) {
-                                                                                                                            echo "checked";
-                                                                                                                        } ?>>
+                                    <input class="form-check-input" type="checkbox" name="dicena[]" id="No" value="No" <?php if (in_array("No", $data1)) {echo "checked";} ?>>
                                     <label class="form-check-label" for="No">
                                         No
                                     </label>
@@ -250,10 +242,7 @@ if (isset($_POST['update'])) {
                 const prodis = document.getElementById("prodis").value;
 
                 if (proname === "") {
-                    showTooltip(
-                        "proname",
-                        "Employee First Name should contain alphabets and spaces only!"
-                    );
+                    showTooltip ("proname","Employee First Name should contain alphabets and spaces only!");
                     return false;
                 }
                 let fileInput = document.getElementById("proimg");

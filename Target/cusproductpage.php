@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'db_connect.php';
 $id = $_GET['id'];
 $sql = "SELECT * FROM product_master WHERE pro_id='" . $id . "'";
@@ -22,7 +23,7 @@ $fet = $result->fetch_array();
     <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand" href="cushome.php">
-                <img src="img/logo.png" alt="Target logo" width="55px" height="65px">
+                <img src="img/logo.png" class="mx-2" alt="Target logo" width="55px" height="65px">
             </a>
             <h2 class="navbar text-center"><?php echo $fet['pro_name']; ?></h2>
             <button type="button" class="btn btn-outline-danger mx-2 my-2 my-lg-0 d-flex align-items-center" onclick="window.location.href='cusloginsignup.php'">
@@ -52,7 +53,7 @@ $fet = $result->fetch_array();
                         ?>
                     </ul>
                 </div>
-                
+
             </nav>
             <main class="col-md-6 ms-sm-auto col-lg-10 px-md-4">
                 <div class="row">
@@ -71,7 +72,7 @@ $fet = $result->fetch_array();
                                                 echo 'Rs.' . $fet['pro_sellprice'];
                                             }
                                             ?></p>
-                                <a href="productcart.php" class="btn btn-primary">Add to Cart</a>
+                                <a href="productcart.php?id=<?php echo $fet['pro_id']; ?>&quantity=1" class="btn btn-outline-primary">Add to Cart</a>
                             </div>
                         </div>
                     </div>

@@ -225,10 +225,7 @@ if (isset($_POST['submit'])) {
                 const prodis = document.getElementById("prodis").value;
                 
                 if (proname === "") {
-                    showTooltip(
-                        "proname",
-                        "Employee First Name should contain alphabets and spaces only!"
-                    );
+                    showTooltip("proname","Employee First Name should contain alphabets and spaces only!");
                     return false;
                 }
                 let fileInput = document.getElementById("proimg");
@@ -240,10 +237,7 @@ if (isset($_POST['submit'])) {
                     "image/jpg",
                 ];
                 if (!file || file.size > 100000 || !allowedMimeTypes.includes(file.type)) {
-                    showTooltip(
-                        "proimg",
-                        "Please Upload Image (maximum size: 100KB, allowed file types: JPEG, PNG, GIF)."
-                    );
+                    showTooltip("proimg","Please Upload Image (maximum size: 100KB, allowed file types: JPEG, PNG, GIF).");
                     return false;
                 }
                 if (prooption === "") {

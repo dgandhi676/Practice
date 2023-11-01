@@ -127,7 +127,6 @@ $total_pages = ceil($total_records / $records_per_page);
                     </tr>
                 </thead>
                 <tbody></tbody>
-                </tr>
                 <tr colspan="5">
                     <?php
                     if ($num1 = mysqli_num_rows($run1) > 0){
