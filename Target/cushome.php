@@ -30,7 +30,7 @@ $total_pages = ceil($total_records / $records_per_page);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Target</title>
+    <title>Target Home</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -45,7 +45,7 @@ $total_pages = ceil($total_records / $records_per_page);
             </a>
             <h2 class="navbar text-center">All Products</h2>
             <button type="button" class="btn btn-outline-danger mx-2 my-2 my-lg-0 d-flex align-items-center" onclick="window.location.href='cusloginsignup.php'">
-                Login/Signup
+                Login / Signup
             </button>
         </div>
     </nav>
@@ -62,10 +62,7 @@ $total_pages = ceil($total_records / $records_per_page);
                             while ($category = mysqli_fetch_assoc($categoryResult)) {
                                 $isActive = ($category['cat_active'] == 1) ? 'active' : '';
                                 echo '<li class="nav-item">
-                    <a class="nav-link ' . $isActive . '" href="#">
-                        ' . $category['cat_name'] . '
-                    </a>
-                  </li>';
+                                <a class="nav-link ' . $isActive . '" href="#">' . $category['cat_name'] . '</a></li>';
                             }
                         }
                         ?>
