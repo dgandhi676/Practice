@@ -1,33 +1,39 @@
 <?php
 session_start();
-// echo $_SESSION['randomString'];
 include 'db_connect.php';
+// echo $_SESSION['randomString'];
+
 if (!isset($_SESSION['randomString'])) {
     header("Location: login.php");
     exit();
 }
+$records_per_page = 6;
+if (isset($_GET['page']) && is_numeric($_GET['page'])) {
+    $current_page = intval($_GET['page']);
+} else {
+    $current_page = 1;
+}
+$offset = ($current_page - 1) * $records_per_page;
+// $sql = "SELECT * FROM";
 ?>
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Page</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
-
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
         <div class="container-fluid">
             <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="offcanvasWithBothOptions"><i class="bi bi-stack" style="font-size: 25px;"></i></button>
             <div class="mx-auto">
-                <a class="navbar-brand" href="home.php">
-                    <img src="img/logo.png" alt="Target logo" width="45px" height="65px">
+                <a href="home.php" class="navbar-brand">
+                    <img src="img/logo.png" alt="Target Logo" width="45px" height="65px">
                 </a>
             </div>
             <button type="button" class="btn btn-outline-danger mx-2 my-2 my-lg-0" onclick="window.location.href='logout.php'">
@@ -35,7 +41,6 @@ if (!isset($_SESSION['randomString'])) {
             </button>
         </div>
     </nav>
-
     <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="sidebar">
         <div class="offcanvas-header ">
             <button type="button" class="btn-close text-reset float-end" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -71,16 +76,6 @@ if (!isset($_SESSION['randomString'])) {
             </div>
         </div>
     </div>
-
-    <div class="container-fluid">
-        <h2 class="text-center"> Welcome Admin User </h2>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            <br>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-        </p>
-    </div>
-
-
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Bootstrap Pooper JS -->
@@ -88,5 +83,4 @@ if (!isset($_SESSION['randomString'])) {
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </body>
-
 </html>

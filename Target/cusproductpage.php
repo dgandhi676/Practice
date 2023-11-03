@@ -53,8 +53,8 @@ $fet = $result->fetch_array();
                         ?>
                     </ul>
                 </div>
-
             </nav>
+            <br>
             <main class="col-md-6 ms-sm-auto col-lg-10 px-md-4">
                 <div class="row">
                     <div class="container mt-5">
@@ -87,5 +87,4 @@ $fet = $result->fetch_array();
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </body>
-
 </html>

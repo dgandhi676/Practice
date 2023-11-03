@@ -123,7 +123,7 @@ if (isset($_POST['update'])) {
                         </a>
                     </li>
                     <li>
-                        <a href="orders.php" class="nav-link">
+                        <a href="adorder.php" class="nav-link">
                             <i class="bi bi-box2"></i>
                             ORDERS
                         </a>

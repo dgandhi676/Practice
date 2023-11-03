@@ -7,42 +7,35 @@ if (isset($_GET['page']) && is_numeric($_GET['page'])) {
     $current_page = 1;
 }
 $offset = ($current_page - 1) * $records_per_page;
-// Search Query
-if (isset($_GET['search'])) {
-    $searchTerm = mysqli_real_escape_string($conn, $_GET['search']);
-    $sql = "SELECT * FROM category_master WHERE 
-            cat_name LIKE '%$searchTerm%' OR 
-            cat_image LIKE '%$searchTerm%' OR 
-            cat_active LIKE '%$searchTerm%'
-            ORDER BY cat_id ASC LIMIT $offset, $records_per_page";
+// Check if the category parameter is set in the URL
+if (isset($_GET['category']) && is_numeric($_GET['category'])) {
+    $category_id = mysqli_real_escape_string($conn, $_GET['category']);
+    $sql = "SELECT * FROM product_master WHERE category_id = $category_id ORDER BY pro_id ASC LIMIT $offset, $records_per_page";
 } else {
-
-    $sql = "SELECT * FROM category_master ORDER BY cat_id ASC LIMIT $offset, $records_per_page";
+    // If no category parameter is set, show all products
+    $sql = "SELECT * FROM product_master ORDER BY pro_id ASC LIMIT $offset, $records_per_page";
 }
 $run1 = mysqli_query($conn, $sql);
-$total_records = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM category_master"));
+$total_records = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM product_master"));
 $total_pages = ceil($total_records / $records_per_page);
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Category</title>
+    <title>Products</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
-
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+<nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand" href="cushome.php">
                 <img src="img/logo.png" alt="Target Logo" width="55px" height="65px">
             </a>
-            <h2 class="navbar text-center" href="cuscategory.php">Category</h2>
             <button type="button" class="btn btn-outline-danger mx-2 my-2 my-lg-0 d-flex align-content-center" onclick="window.location.href='cusloginsignup.php'">login / Signup</button>
         </div>
     </nav>
@@ -69,17 +62,33 @@ $total_pages = ceil($total_records / $records_per_page);
             <br>
             <main class="col-md-6 ms-sm-auto col-lg-10 px-md-4">
                 <div class="row">
+                <?php
+                    if ($num1 = mysqli_num_rows($run1) > 0) {
+                        while ($result = mysqli_fetch_assoc($run1)) {
+                    ?>
+                            <div class="col-md-4 mt-3">
+                                <div class="card d-flex align-items-center">
+                                    <img src="<?php echo $result['pro_image']; ?>" style="height: 150px; width: 150px;" class="card-img-top my-2" alt="Product Image">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title"><?php echo $result['pro_name']; ?></h5>
+                                        <p class="card-text">
+                                            <?php
+                                            if ($result['pro_disco'] == "Yes") {
+                                                echo 'Rs.' . $result['pro_discprice'];
+                                            } else {
+                                                echo 'Rs.' . $result['pro_sellprice'];
+                                            }
+                                            ?>
+                                        </p>
+                                        <a href="cusproductpage.php?id=<?php echo $result['pro_id']; ?>" class="btn btn-outline-primary">View Details</a>
+                                    </div>
+
+                                </div>
+                            </div>
                     <?php
-                    while ($row = mysqli_fetch_assoc($run1)) {
-                        echo '<div class="col-md-4 mt-3">
-                    <div class="card d-flex align-items-center h-100 w-75">
-                        <img src="' . $row['cat_image'] . '" class="card-img-top " alt="' . $row['cat_name'] . '" >
-                        <div class="card-body">
-                            <h5 class="card-title text-center">' . $row['cat_name'] . '</h5>
-                            <a href="filterproduct.php?category=' . $row['cat_id'] . '" class="btn btn-primary">View Products</a>
-                        </div>
-                    </div>
-                </div>';
+                        }
+                    } else {
+                        echo "<div class='col-12'><p class='text-center text-danger'>No Products Found!</p></div>";
                     }
                     ?>
                 </div>
@@ -113,5 +122,4 @@ $total_pages = ceil($total_records / $records_per_page);
     <!-- JQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </body>
-
 </html>
