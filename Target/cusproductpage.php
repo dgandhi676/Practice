@@ -62,10 +62,10 @@ $fet = $result->fetch_array();
                             <div class="col-md-6">
                                 <img src="<?php echo $fet['pro_image']; ?>" alt="Product Image" class="img-fluid h-100 w-75">
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 my-3">
                                 <h1><?php echo $fet['pro_name']; ?></h1>
-                                <p><?php echo $fet['pro_des']; ?></p>
-                                <p>Price: <?php
+                                <p class="lh-base my-4"><?php echo $fet['pro_des']; ?></p>
+                                <p class="fw-bolder">Price: <?php
                                             if ($fet['pro_disco'] == "Yes") {
                                                 echo 'Rs.' . $fet['pro_discprice'];
                                             } else {

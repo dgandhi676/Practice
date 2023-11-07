@@ -7,20 +7,22 @@ if (isset($_GET['page']) && is_numeric($_GET['page'])) {
     $current_page = 1;
 }
 $offset = ($current_page - 1) * $records_per_page;
-// Check if the category parameter is set in the URL
 if (isset($_GET['category']) && is_numeric($_GET['category'])) {
     $category_id = mysqli_real_escape_string($conn, $_GET['category']);
-    $sql = "SELECT * FROM product_master WHERE category_id = $category_id ORDER BY pro_id ASC LIMIT $offset, $records_per_page";
+    $sql = "SELECT * FROM product_master WHERE pro_category = $category_id ORDER BY pro_id ASC LIMIT $offset, $records_per_page";
 } else {
-    // If no category parameter is set, show all products
     $sql = "SELECT * FROM product_master ORDER BY pro_id ASC LIMIT $offset, $records_per_page";
 }
 $run1 = mysqli_query($conn, $sql);
+if (!$run1) {
+    die('Error: ' . mysqli_error($conn));
+}
 $total_records = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM product_master"));
 $total_pages = ceil($total_records / $records_per_page);
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,8 +32,9 @@ $total_pages = ceil($total_records / $records_per_page);
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
+
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand" href="cushome.php">
                 <img src="img/logo.png" alt="Target Logo" width="55px" height="65px">
@@ -62,7 +65,7 @@ $total_pages = ceil($total_records / $records_per_page);
             <br>
             <main class="col-md-6 ms-sm-auto col-lg-10 px-md-4">
                 <div class="row">
-                <?php
+                    <?php
                     if ($num1 = mysqli_num_rows($run1) > 0) {
                         while ($result = mysqli_fetch_assoc($run1)) {
                     ?>
@@ -122,4 +125,5 @@ $total_pages = ceil($total_records / $records_per_page);
     <!-- JQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </body>
+
 </html>

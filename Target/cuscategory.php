@@ -7,7 +7,6 @@ if (isset($_GET['page']) && is_numeric($_GET['page'])) {
     $current_page = 1;
 }
 $offset = ($current_page - 1) * $records_per_page;
-// Search Query
 if (isset($_GET['search'])) {
     $searchTerm = mysqli_real_escape_string($conn, $_GET['search']);
     $sql = "SELECT * FROM category_master WHERE 
@@ -16,7 +15,6 @@ if (isset($_GET['search'])) {
             cat_active LIKE '%$searchTerm%'
             ORDER BY cat_id ASC LIMIT $offset, $records_per_page";
 } else {
-
     $sql = "SELECT * FROM category_master ORDER BY cat_id ASC LIMIT $offset, $records_per_page";
 }
 $run1 = mysqli_query($conn, $sql);
