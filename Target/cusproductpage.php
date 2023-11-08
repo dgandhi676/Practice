@@ -65,14 +65,14 @@ $fet = $result->fetch_array();
                             <div class="col-md-6 my-3">
                                 <h1><?php echo $fet['pro_name']; ?></h1>
                                 <p class="lh-base my-4"><?php echo $fet['pro_des']; ?></p>
-                                <p class="fw-bolder">Price: <?php
-                                            if ($fet['pro_disco'] == "Yes") {
-                                                echo 'Rs.' . $fet['pro_discprice'];
-                                            } else {
-                                                echo 'Rs.' . $fet['pro_sellprice'];
-                                            }
-                                            ?></p>
-                                <a href="productcart.php?id=<?php echo $fet['pro_id']; ?>&quantity=1" class="btn btn-outline-primary">Add to Cart</a>
+                                <p class="fw-bolder">Price: <?php if ($fet['pro_disco'] == "Yes") {echo 'Rs.' . $fet['pro_discprice'];
+                                } else {
+                                    echo 'Rs.' . $fet['pro_sellprice'];
+                                }
+                                ?></p>
+                                <a href="javascript:void(0);" id="addToCartBtn" class="btn btn-outline-primary">
+                                    <i class="bi bi-cart-plus"></i> Add to Cart
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -86,5 +86,32 @@ $fet = $result->fetch_array();
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $("#addToCartBtn").click(function() {
+            var productId = <?php echo $fet['pro_id']; ?>;
+            var quantity = 1; // You can modify this to add multiple quantities if needed
+
+            $.ajax({
+                type: "GET",
+                url: "productcart.php",
+                data: {
+                    id: productId,
+                    quantity: quantity
+                },
+                success: function(response) {
+                    // Handle the response from the server if needed
+                    // For example, display a success message or update cart count
+                    console.log("Product added to cart successfully");
+                },
+                error: function(xhr, status, error) {
+                    // Handle errors if the request fails
+                    console.error("Error adding product to cart: " + error);
+                }
+            });
+        });
+    });
+</script>
 </body>
+
 </html>

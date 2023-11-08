@@ -39,7 +39,9 @@ $total_pages = ceil($total_records / $records_per_page);
             <a class="navbar-brand" href="cushome.php">
                 <img src="img/logo.png" alt="Target Logo" width="55px" height="65px">
             </a>
-            <button type="button" class="btn btn-outline-danger mx-2 my-2 my-lg-0 d-flex align-content-center" onclick="window.location.href='cusloginsignup.php'">login / Signup</button>
+            <button type="button" class="btn btn-outline-danger mx-2 my-2 my-lg-0 d-flex align-items-center" onclick="window.location.href='cusloginsignup.php'">
+                Login / Signup
+            </button>
         </div>
     </nav>
     <div class="container-fluid">

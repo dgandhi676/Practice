@@ -41,7 +41,9 @@ $total_pages = ceil($total_records / $records_per_page);
                 <img src="img/logo.png" alt="Target Logo" width="55px" height="65px">
             </a>
             <h2 class="navbar text-center" href="cuscategory.php">Category</h2>
-            <button type="button" class="btn btn-outline-danger mx-2 my-2 my-lg-0 d-flex align-content-center" onclick="window.location.href='cusloginsignup.php'">login / Signup</button>
+            <button type="button" class="btn btn-outline-danger mx-2 my-2 my-lg-0 d-flex align-items-center" onclick="window.location.href='cusloginsignup.php'">
+                Login / Signup
+            </button>
         </div>
     </nav>
     <div class="container-fluid">
@@ -56,7 +58,7 @@ $total_pages = ceil($total_records / $records_per_page);
                         if (mysqli_num_rows($categoryResult) > 0) {
                             while ($category = mysqli_fetch_assoc($categoryResult)) {
                                 $isActive = ($category['cat_active'] == 1) ? ' active' : '';
-                                echo '<li class="nav-item"><a class="nav-link' . $isActive . '" href="cusproductpage.php?category=' . $category['cat_id'] . '">' . $category['cat_name'] . '</a></li>';
+                                echo '<li class="nav-item"><a class="nav-link' . $isActive . '" href="filterproduct.php?category=' . $category['cat_id'] . '">' . $category['cat_name'] . '</a></li>';
                             }
                         }
                         ?>
