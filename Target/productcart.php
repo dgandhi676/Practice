@@ -90,20 +90,23 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                                 <?php
                                 if ($run1 && mysqli_num_rows($run1) > 0) {
                                     while ($result = mysqli_fetch_assoc($run1)) {
+                                        $productId = $result['pro_id'];
+                                        $quantity = isset($_SESSION['cart'][$productId]) ? $_SESSION['cart'][$productId] : 1;
                                         $price = ($result['pro_disco'] == "Yes") ? $result['pro_discprice'] : $result['pro_sellprice'];
                                         echo "
-                                <tr>
-                                    <td><img src='" . $result['pro_image'] . "' height='75px' width='75px'></td>
-                                    <td>" . $result['pro_name'] . "</td>
-                                    <td>Rs." . $price . "</td>
-                                    <td><input type='number' class='quantity-input' data-id='" . $result['pro_id'] . "' value='1' min='1'></td>
-                                    <td><a href='#' class='btn btn-outline-danger btn-sm delete-btn' data-id='" . $result['pro_id'] . "'>DELETE</a></td>
-                                </tr>";
+                                        <tr>
+                                        <td><img src='" . $result['pro_image'] . "' height='75px' width='75px'></td>
+                                        <td>" . $result['pro_name'] . "</td>
+                                        <td>Rs." . $price . "</td>
+                                        <td><input type='number' class='quantity-input' data-id='" . $productId . "' value='" . $quantity . "' min='1'></td>
+                                        <td><a href='#' class='btn btn-outline-danger btn-sm delete-btn' data-id='" . $productId . "'>DELETE</a></td>
+                                        </tr>";
                                     }
-                                } else {
+                            } else {
                                     echo "<tr><td colspan='5'><p class='text-center text-danger'>No Products Found!</p></td></tr>";
                                 }
                                 ?>
+
                             </tbody>
                         </table>
                         <div class="row mt-3">
@@ -126,42 +129,47 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
-    // Function to update total price based on quantity changes
-    function updateTotalPrice() {
-        let totalPrice = 0;
-        $('.quantity-input').each(function() {
-            const productId = $(this).data('id');
-            const quantity = parseInt($(this).val());
-            const price = parseFloat($(this).closest('tr').find('td:nth-child(3)').text().replace('Rs.', '').trim());
-            totalPrice += quantity * price;
-        });
-        $('#total-price').text('Rs. ' + totalPrice.toFixed(2));
-    }
-
-    // Event listener for quantity changes
-    $('.quantity-input').on('input', function() {
-        updateTotalPrice();
-    });
-
-    // Event listener for delete buttons
-    $('.delete-btn').on('click', function(e) {
-        e.preventDefault();
-        const productId = $(this).data('id');
-        if (confirm("Are you sure you want to delete this product?")) {
-            // Implement your code to remove the product from the session or database
-            $.get('delete_product.php', { id: productId }, function(response) { });
-            $(this).closest('tr').remove();
+        function updateTotalPrice() {
+            let totalPrice = 0;
+            $('.quantity-input').each(function() {
+                const productId = $(this).data('id');
+                const quantity = parseInt($(this).val());
+                const price = parseFloat($(this).closest('tr').find('td:nth-child(3)').text().replace('Rs.', '').trim());
+                totalPrice += quantity * price;
+            });
+            $('#total-price').text('Rs. ' + totalPrice.toFixed(2));
         }
-    });
 
-    // Event listener for checkout button
-    $('#checkout-btn').on('click', function() {
-        window.location.href = 'checkout.php';
-    });
+        $('.quantity-input').on('input', function() {
+            const productId = $(this).data('id');
+            const quantity = $(this).val();
 
-    // Initial calculation of total price
-    updateTotalPrice();
-</script>
+            $.post('update_quantity.php', {
+                id: productId,
+                quantity: quantity
+            }, function(response) {});
+
+            updateTotalPrice();
+        });
+
+        $('.delete-btn').on('click', function(e) {
+            e.preventDefault();
+            const productId = $(this).data('id');
+            if (confirm("Are you sure you want to delete this product?")) {
+                $.get('delete_product.php', {
+                    id: productId
+                }, function(response) {});
+                $(this).closest('tr').remove();
+                updateTotalPrice();
+            }
+        });
+
+        $('#checkout-btn').on('click', function() {
+            window.location.href = 'checkout.php';
+        });
+
+        updateTotalPrice();
+    </script>
 </body>
 
 </html>

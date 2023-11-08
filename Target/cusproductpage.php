@@ -27,7 +27,7 @@ $fet = $result->fetch_array();
             </a>
             <h2 class="navbar text-center"><?php echo $fet['pro_name']; ?></h2>
             <button type="button" class="btn btn-outline-danger mx-2 my-2 my-lg-0 d-flex align-items-center" onclick="window.location.href='cusloginsignup.php'">
-                Login/Signup
+                Login / Signup
             </button>
         </div>
     </nav>
@@ -90,7 +90,7 @@ $fet = $result->fetch_array();
     $(document).ready(function() {
         $("#addToCartBtn").click(function() {
             var productId = <?php echo $fet['pro_id']; ?>;
-            var quantity = 1; // You can modify this to add multiple quantities if needed
+            var quantity = 1;
 
             $.ajax({
                 type: "GET",
@@ -100,13 +100,10 @@ $fet = $result->fetch_array();
                     quantity: quantity
                 },
                 success: function(response) {
-                    // Handle the response from the server if needed
-                    // For example, display a success message or update cart count
-                    console.log("Product added to cart successfully");
+                    // console.log("Product added to cart successfully");
                 },
                 error: function(xhr, status, error) {
-                    // Handle errors if the request fails
-                    console.error("Error adding product to cart: " + error);
+                    // console.error("Error adding product to cart: " + error);
                 }
             });
         });
