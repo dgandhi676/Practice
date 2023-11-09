@@ -2,6 +2,7 @@
 session_start();
 include 'db_connect.php';
 
+isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
@@ -9,12 +10,29 @@ if (isset($_GET['id'])) {
         $_SESSION['cart'] = [];
     }
 
-    $_SESSION['cart'][$id] = 1;
+    if (isset($_SESSION['cart'][$id])) {
+        $_SESSION['cart'][$id]++;
+    } else {
+        $_SESSION['cart'][$id] = 1;
+    }
 
     header('Location: productcart.php');
-} else {
-    // echo "<p>No product found!</p>";
 }
+if (isset($_GET['action']) && $_GET['action'] == "remove" && isset($_GET['id'])) {
+    $id = $_GET['id'];
+
+    if (!empty($_SESSION['cart']) && array_key_exists($id, $_SESSION['cart'])) {
+        unset($_SESSION['cart'][$id]);
+    }
+
+    header('Location: productcart.php');
+}
+
+if (isset($_GET['action']) && $_GET['action'] == "empty") {
+    unset($_SESSION['cart']);
+    header('Location: productcart.php');
+}
+
 if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
     $productIds = implode(',', array_keys($_SESSION['cart']));
     $sql = "SELECT * FROM product_master WHERE pro_id IN ($productIds)";
@@ -45,7 +63,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
             </a>
             <h2 class="navbar text-center">Cart</h2>
             <button type="button" class="btn btn-outline-danger mx-2 my-2 my-lg-0 d-flex align-items-center" onclick="window.location.href='cusloginsignup.php'">
-                Login/Signup
+                Login / Signup
             </button>
         </div>
     </nav>
@@ -99,15 +117,15 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                                         <td>" . $result['pro_name'] . "</td>
                                         <td>Rs." . $price . "</td>
                                         <td><input type='number' class='quantity-input' data-id='" . $productId . "' value='" . $quantity . "' min='1'></td>
-                                        <td><a href='#' class='btn btn-outline-danger btn-sm delete-btn' data-id='" . $productId . "'>DELETE</a></td>
+                                        <td><button class='btn btn-outline-danger btn-sm delete-btn' data-id='" . $productId . "'>DELETE</button></td>
                                         </tr>";
                                     }
-                            } else {
+                                } else {
                                     echo "<tr><td colspan='5'><p class='text-center text-danger'>No Products Found!</p></td></tr>";
                                 }
                                 ?>
 
-                            </tbody>
+                            </tbody>x
                         </table>
                         <div class="row mt-3">
                             <div class="col-md-6">
@@ -139,6 +157,13 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
             });
             $('#total-price').text('Rs. ' + totalPrice.toFixed(2));
         }
+        $('#checkout-btn').on('click', function() {
+            if ('user_id' in <?php echo json_encode($_SESSION); ?>) {
+                window.location.href = 'checkout.php';
+            } else {
+                window.location.href = 'cusloginsignup.php'; 
+            }
+        });
 
         $('.quantity-input').on('input', function() {
             const productId = $(this).data('id');
@@ -156,9 +181,9 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
             e.preventDefault();
             const productId = $(this).data('id');
             if (confirm("Are you sure you want to delete this product?")) {
-                $.get('delete_product.php', {
-                    id: productId
-                }, function(response) {});
+                $.get('productcart.php?action=remove&id=' + productId, function(response) {
+
+                });
                 $(this).closest('tr').remove();
                 updateTotalPrice();
             }

@@ -26,9 +26,14 @@ $fet = $result->fetch_array();
                 <img src="img/logo.png" class="mx-2" alt="Target logo" width="55px" height="65px">
             </a>
             <h2 class="navbar text-center"><?php echo $fet['pro_name']; ?></h2>
-            <button type="button" class="btn btn-outline-danger mx-2 my-2 my-lg-0 d-flex align-items-center" onclick="window.location.href='cusloginsignup.php'">
+            <div class="d-flex align-items-center">
+            <button type="button" class="btn btn-outline-primary mx-2" onclick="window.location.href='productcart.php'">
+                Cart <?php echo isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0; ?>
+            </button>
+            <button type="button" class="btn btn-outline-danger mx-2" onclick="window.location.href='cusloginsignup.php'">
                 Login / Signup
             </button>
+        </div>
         </div>
     </nav>
     <div class="container-fluid">

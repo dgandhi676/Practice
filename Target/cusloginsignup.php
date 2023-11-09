@@ -1,25 +1,53 @@
 <?php
 session_start();
 include 'db_connect.php';
+
 if (isset($_POST['signup'])) {
-    echo "<pre>";
-    print_r($_POST);
-    die();
-    $signupname = $_POST['signupname'];
-    $signupaddress =  mysqli_real_escape_string($conn, $_POST['signupaddress']);
-    $signupemail = $_POST['signupemail'];
-    $signuppass = $_POST['signuppass'];
+    $signupname = mysqli_real_escape_string($conn, $_POST['signupname']);
+    $signupaddress = mysqli_real_escape_string($conn, $_POST['signupaddress']);
+    $signupemail = mysqli_real_escape_string($conn, $_POST['signupemail']);
+    $signuppass = password_hash($_POST['signuppass'], PASSWORD_DEFAULT);
 
+    $stmt = $conn->prepare("INSERT INTO customer_master (cus_name, cus_address, cus_email, cus_password) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $signupname, $signupaddress, $signupemail, $signuppass);
 
-    $sqli = "INSERT INTO customer_master (cus_name, cus_address, cus_email, cus_password) values ('$signupname', '$signupaddress', '$signupemail', '$signuppass')";
-
-    if (mysqli_query($conn, $sqli)) {
+    if ($stmt->execute()) {
         header('Location: cusloginsignup.php');
+        exit();
     } else {
-        echo "error: " . mysqli_error($conn);
+        echo "Error: " . $stmt->error;
+    }
+
+    $stmt->close();
+}
+
+if (isset($_POST['login'])) {
+    $loginemail = mysqli_real_escape_string($conn, $_POST["loginemail"]);
+    $loginpass = $_POST["loginpass"];
+
+    $stmt = $conn->prepare("SELECT cus_email, cus_password FROM customer_master WHERE cus_email=?");
+    $stmt->bind_param("s", $loginemail);
+    $stmt->execute();
+    $stmt->bind_result($db_email, $db_password);
+    $stmt->fetch();
+
+    if (password_verify($loginpass, $db_password)) {
+        $randomString = substr(str_shuffle("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"), 0, 20);
+        $_SESSION['randomString'] = $randomString;
+        $_SESSION["email"] = $loginemail;
+        $stmt->close();
+        header("Location: cushome.php");
+        exit();
+    } else {
+        echo '<div class="alert alert-danger text-center">
+                <h4 class="mb-0">Sorry, Invalid Email and Password</h4>
+                <p class="mb-0">Please Enter Correct Credentials</p>
+              </div>';
+        $stmt->close();
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,15 +71,12 @@ if (isset($_POST['signup'])) {
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand" href="cushome.php">
                 <img src="img/logo.png" class="mx-2" alt="Target logo" width="55px" height="65px">
             </a>
             <h2 class="navbar text-center">Target</h2>
-            <button type="button" class="btn btn-outline-danger mx-2 my-2 my-lg-0 d-flex align-items-center" onclick="window.location.href='cusloginsignup.php'">
-                Login/Signup
-            </button>
         </div>
     </nav>
     <div class="container mt-5">
@@ -84,7 +109,7 @@ if (isset($_POST['signup'])) {
                                             $_SESSION['randomString'] = $randomString;
                                             $_SESSION["email"] = $loginemail;
                                             $stmt->close();
-                                            header("Location: home.php");
+                                            header("Location: cushome.php");
                                             exit();
                                         } else {
                                             echo '<div class="alert alert-danger text-center">
@@ -99,10 +124,10 @@ if (isset($_POST['signup'])) {
                                         <label for="loginemail" class="form-label">Email:</label>
                                     </div>
                                     <div class="form-floating my-3">
-                                        <input type="password" class="form-control" id="loginpass" placeholder="Enter your Password">
+                                        <input type="password" class="form-control" id="loginpass" name="loginpass" placeholder="Enter your Password">
                                         <label for="loginPass" class="form-label">Password</label>
                                     </div>
-                                    <button type="submit" class="btn btn-outline-primary px-3">Sign In</button>
+                                    <button type="submit" class="btn btn-outline-primary px-3" name="login" id="login">Login</button>
                                 </form>
                             </div>
                             <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="signup-tab">

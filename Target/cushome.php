@@ -44,9 +44,14 @@ $total_pages = ceil($total_records / $records_per_page);
                 <img src="img/logo.png" class="mx-2" alt="Target logo" width="55px" height="65px">
             </a>
             <h2 class="navbar text-center">All Products</h2>
-            <button type="button" class="btn btn-outline-danger mx-2 my-2 my-lg-0 d-flex align-items-center" onclick="window.location.href='cusloginsignup.php'">
-                Login / Signup
-            </button>
+            <div class="d-flex align-items-center">
+                <button type="button" class="btn btn-outline-primary mx-2 cart-button" onclick="window.location.href='productcart.php'">
+                    Cart <?php echo isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0; ?>
+                </button>
+                <button type="button" class="btn btn-outline-danger mx-2" onclick="window.location.href='cusloginsignup.php'">
+                    Login / Signup
+                </button>
+            </div>
         </div>
     </nav>
     <div class="container-fluid">
@@ -133,6 +138,17 @@ $total_pages = ceil($total_records / $records_per_page);
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        function updateCartCount() {
+            $.get('get_cart_count.php', function(count) {
+                $('.cart-button').text('Cart ' + count);
+            });
+        }
+
+        $(document).ready(function() {
+            updateCartCount();
+        });
+    </script>
 </body>
 
 </html>
