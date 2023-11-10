@@ -21,31 +21,7 @@ if (isset($_POST['signup'])) {
     $stmt->close();
 }
 
-if (isset($_POST['login'])) {
-    $loginemail = mysqli_real_escape_string($conn, $_POST["loginemail"]);
-    $loginpass = $_POST["loginpass"];
 
-    $stmt = $conn->prepare("SELECT cus_email, cus_password FROM customer_master WHERE cus_email=?");
-    $stmt->bind_param("s", $loginemail);
-    $stmt->execute();
-    $stmt->bind_result($db_email, $db_password);
-    $stmt->fetch();
-
-    if (password_verify($loginpass, $db_password)) {
-        $randomString = substr(str_shuffle("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"), 0, 20);
-        $_SESSION['randomString'] = $randomString;
-        $_SESSION["email"] = $loginemail;
-        $stmt->close();
-        header("Location: cushome.php");
-        exit();
-    } else {
-        echo '<div class="alert alert-danger text-center">
-                <h4 class="mb-0">Sorry, Invalid Email and Password</h4>
-                <p class="mb-0">Please Enter Correct Credentials</p>
-              </div>';
-        $stmt->close();
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -92,19 +68,22 @@ if (isset($_POST['login'])) {
                                 <a class="nav-link" id="signup-tab" data-bs-toggle="tab" href="#signup" role="tab" aria-controls="signup" aria-selected="false">Sign Up</a>
                             </li>
                         </ul>
+                        <br>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
                                 <form action="" method="post" id="loginform">
                                     <?php
                                     if (isset($_POST['login'])) {
-                                        $loginemail = $_POST["loginemail"];
+                                        $loginemail = mysqli_real_escape_string($conn, $_POST["loginemail"]);
                                         $loginpass = $_POST["loginpass"];
-                                        $stmt = $conn->prepare("SELECT * FROM customer_master WHERE cus_email=? AND cus_password=?");
-                                        $stmt->bind_param("ss", $loginemail, $loginpass);
+
+                                        $stmt = $conn->prepare("SELECT cus_email, cus_password FROM customer_master WHERE cus_email=?");
+                                        $stmt->bind_param("s", $loginemail);
                                         $stmt->execute();
-                                        $result = $stmt->get_result();
-                                        if ($result->num_rows > 0) {
-                                            $row = $result->fetch_assoc();
+                                        $stmt->bind_result($db_email, $db_password);
+                                        $stmt->fetch();
+
+                                        if (password_verify($loginpass, $db_password)) {
                                             $randomString = substr(str_shuffle("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"), 0, 20);
                                             $_SESSION['randomString'] = $randomString;
                                             $_SESSION["email"] = $loginemail;
