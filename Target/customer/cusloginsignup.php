@@ -82,11 +82,12 @@ if (isset($_POST['signup'])) {
                                         $stmt->bind_param("s", $loginemail);
                                         $stmt->execute();
                                         $stmt->bind_result($db_email, $db_password_hash);
-                                        $stmt->fetch();
+                                           $stmt->fetch();
 
                                         if (password_verify($loginpass, $db_password_hash)) {
                                             $randomString = substr(str_shuffle("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"), 0, 20);
                                             $_SESSION['randomString'] = $randomString;
+                                            $_SESSION['customerName'] = $loginname;
                                             $_SESSION["customerEmail"] = $loginemail;
                                             $stmt->close();
                                             header("Location: checkout.php");

@@ -133,7 +133,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                                 }
                                 ?>
 
-                            </tbody>x
+                            </tbody>
                         </table>
                         <div class="row mt-3">
                             <div class="col-md-6">
